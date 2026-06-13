@@ -1,4 +1,5 @@
-import { useRef, type Ref } from "react";
+import { useRef, useState, type Ref } from "react";
+import { motion } from "motion/react";
 import svgPaths from "../../imports/スマホデザインカンプMain最終版/svg-nkcp82ojx7";
 import img from "../../imports/スマホデザインカンプMain最終版/6a3050d00e701ea5527c626ec1519aa4e799bebd.png";
 import img1 from "../../imports/スマホデザインカンプMain最終版/ca73fb16c2782ab6be9974c944edcf320c673545.png";
@@ -742,18 +743,7 @@ function ConceptSection({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
             飲んだ
           </p>
         </div>
-        <p className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%-113px)] not-italic text-[0px] text-black top-[354.23px] tracking-[20px] whitespace-nowrap">
-          <span className="leading-[0.88] text-[105px]">拉</span>
-          <span className="leading-[0.88] text-[100px]">麺</span>
-        </p>
       </div>
-      <p className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%-109px)] not-italic text-[0px] text-black top-[1188px] tracking-[2.4px] whitespace-nowrap">
-        <span className="leading-[0.88] text-[48px]">ら</span>
-        <span className="leading-[0.88] text-[40px] tracking-[23.6px]">ー</span>
-        <span className="leading-[0.88] text-[48px] tracking-[1.44px]">
-          めん
-        </span>
-      </p>
     </div>
   );
 }
@@ -781,12 +771,129 @@ function NoodleDecoration() {
   );
 }
 
+// のれんの絵柄（幅392px・輪郭＋拉麺＋らーめん）。左右の半分でそれぞれ呼び出す。
+function NorenContent() {
+  return (
+    <div className="absolute left-0 top-0 h-[200px] w-[392px]">
+      {/* のれんの輪郭（4枚のスリット） */}
+      <div className="absolute left-0 top-0 h-[175px] w-[392px]">
+        <svg
+          className="block size-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 392 176.02"
+        >
+          <path
+            d={svgPaths.pba0b500}
+            stroke="var(--stroke-0, black)"
+            strokeWidth="2"
+          />
+        </svg>
+      </div>
+      {/* 拉麺 */}
+      <p className="[word-break:break-word] absolute left-[calc(50%-113px)] top-[17px] font-['Yuji_Syuku',sans-serif] not-italic leading-[0] text-[0px] text-black tracking-[20px] whitespace-nowrap">
+        <span className="leading-[0.88] text-[105px]">拉</span>
+        <span className="leading-[0.88] text-[100px]">麺</span>
+      </p>
+      {/* らーめん */}
+      <p className="[word-break:break-word] absolute left-[calc(50%-109px)] top-[121px] font-['Yuji_Syuku',sans-serif] not-italic leading-[0] text-[0px] text-black tracking-[2.4px] whitespace-nowrap">
+        <span className="leading-[0.88] text-[48px]">ら</span>
+        <span className="leading-[0.88] text-[40px] tracking-[23.6px]">ー</span>
+        <span className="leading-[0.88] text-[48px] tracking-[1.44px]">めん</span>
+      </p>
+    </div>
+  );
+}
+
+// 拉麺のれんゲート：くぐる（タップ）まで下が見えない。くぐると左右に割れて持ち上がる。
+function NorenGate({ passed, onPass }: { passed: boolean; onPass: () => void }) {
+  // 左右それぞれの半分。clip(overflow-hidden)で中央のスリットから割る。
+  const half = (side: "left" | "right") => {
+    const isLeft = side === "left";
+    return (
+      <motion.div
+        className="absolute top-0 h-[200px] w-[196px] overflow-hidden"
+        style={{
+          left: isLeft ? 0 : 196,
+          transformOrigin: isLeft ? "left top" : "right top",
+        }}
+        animate={
+          passed
+            ? {
+                x: isLeft ? "-120%" : "120%",
+                y: "-18%",
+                rotate: isLeft ? -5 : 5,
+                opacity: 0,
+              }
+            : { x: 0, y: 0, rotate: 0, opacity: 1 }
+        }
+        transition={
+          passed
+            ? { duration: 0.95, ease: [0.7, 0, 0.3, 1] }
+            : { duration: 0.5 }
+        }
+      >
+        {/* 風にゆれる（くぐる前のみ） */}
+        <motion.div
+          className="absolute left-0 top-0 h-[200px] w-[392px]"
+          style={{
+            transformOrigin: "top center",
+            marginLeft: isLeft ? 0 : -196,
+          }}
+          animate={passed ? { rotate: 0, skewX: 0 } : { rotate: [-0.7, 0.7, -0.7], skewX: [-0.4, 0.4, -0.4] }}
+          transition={passed ? { duration: 0.3 } : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <NorenContent />
+        </motion.div>
+      </motion.div>
+    );
+  };
+
+  return (
+    <div className="-translate-x-1/2 absolute left-1/2 top-[1067px] z-40 h-[230px] w-[392px]">
+      {/* くぐる前：上から布が下りるリベール */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0 }}
+        animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }}
+        transition={{ duration: 1, ease: [0.7, 0, 0.3, 1], delay: 0.3 }}
+      >
+        {half("left")}
+        {half("right")}
+      </motion.div>
+
+      {/* くぐる導線（クリック領域＋案内） */}
+      {!passed && (
+        <button
+          type="button"
+          onClick={onPass}
+          aria-label="暖簾をくぐる"
+          className="absolute left-0 top-0 z-50 h-[200px] w-full cursor-pointer bg-transparent"
+        >
+          <motion.span
+            className="absolute bottom-[2px] left-1/2 -translate-x-1/2 whitespace-nowrap font-['Yuji_Syuku',sans-serif] text-[13px] text-[#9b7b3a]"
+            style={{ letterSpacing: "4px" }}
+            animate={{ opacity: [0.4, 1, 0.4], y: [0, 3, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            暖簾をくぐる ▼
+          </motion.span>
+        </button>
+      )}
+    </div>
+  );
+}
+
 function FirstView({
   sectionRef,
   conceptRef,
+  passed,
+  onPass,
 }: {
   sectionRef?: Ref<HTMLDivElement>;
   conceptRef?: Ref<HTMLDivElement>;
+  passed: boolean;
+  onPass: () => void;
 }) {
   return (
     <div
@@ -804,23 +911,8 @@ function FirstView({
           <p className="relative shrink-0">霧</p>
         </div>
       </div>
-      {/* のれん */}
-      <div className="-translate-x-1/2 absolute h-[175px] left-1/2 top-[1067px] w-[392px]">
-        <div className="absolute inset-[0_0_-0.57%_0]">
-          <svg
-            className="block size-full"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 392 176.02"
-          >
-            <path
-              d={svgPaths.pba0b500}
-              stroke="var(--stroke-0, black)"
-              strokeWidth="2"
-            />
-          </svg>
-        </div>
-      </div>
+      {/* のれんゲート（くぐると下が現れる） */}
+      <NorenGate passed={passed} onPass={onPass} />
       <p
         className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[310px] leading-[normal] left-[calc(50%+121px)] not-italic text-[#9b7b3a] text-[20px] top-[44px] w-[20px]"
         style={{ fontFeatureSettings: '"vert"' }}
@@ -843,6 +935,8 @@ export default function MainPage({ onNavigate }: Props) {
   const conceptRef = useRef<HTMLDivElement | null>(null);
   const productRef = useRef<HTMLDivElement | null>(null);
   const authorRef = useRef<HTMLDivElement | null>(null);
+  // のれんをくぐったか（くぐるまで、のれんから下のコンテンツは隠す）
+  const [passed, setPassed] = useState(false);
 
   const scrollTo = (ref: { current: HTMLDivElement | null }) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -885,7 +979,26 @@ export default function MainPage({ onNavigate }: Props) {
       <KenbaikiSection onNavigate={onNavigate} sectionRef={productRef} />
       <GuideSection onNavigate={onNavigate} />
       <SiteIntro sectionRef={siteIntroRef} />
-      <FirstView sectionRef={firstViewRef} conceptRef={conceptRef} />
+      <FirstView
+        sectionRef={firstViewRef}
+        conceptRef={conceptRef}
+        passed={passed}
+        onPass={() => setPassed(true)}
+      />
+      {/* のれんから下を隠す目隠し。くぐると上へめくれて消える */}
+      <motion.div
+        className="absolute left-0 z-30 w-full bg-[#f2ede4]"
+        style={{
+          top: "1250px",
+          height: "3520px",
+          transformOrigin: "top center",
+          pointerEvents: passed ? "none" : "auto",
+        }}
+        initial={false}
+        animate={passed ? { y: "-100%", opacity: 0 } : { y: 0, opacity: 1 }}
+        transition={{ duration: 0.95, ease: [0.7, 0, 0.3, 1], delay: passed ? 0.15 : 0 }}
+        aria-hidden
+      />
     </div>
   );
 }

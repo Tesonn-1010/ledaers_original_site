@@ -26,7 +26,9 @@ function FooterBackArrow({ onNavigate }: { onNavigate: (page: "main") => void })
   );
 }
 
-function FooterNavContents() {
+function FooterNavContents({ onNavigate }: { onNavigate: (page: "main") => void }) {
+  const navClass =
+    "[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] not-italic text-[8px] text-black top-[17px] w-[8px] bg-transparent border-none cursor-pointer p-0 text-left";
   return (
     <div className="h-[60px] relative shrink-0 w-full" data-name="コンテンツ">
       <div className="absolute h-0 left-0 top-0 w-[100px]">
@@ -36,14 +38,13 @@ function FooterNavContents() {
           </svg>
         </div>
       </div>
-      <p className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[92px] not-italic text-[8px] text-black top-[17px] w-[8px]" style={{ fontFeatureSettings: '"dlig"' }}>トップ</p>
-      <div className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%-4px)] not-italic text-[8px] text-black top-[17px] w-[8px]" style={{ fontFeatureSettings: '"dlig"' }}>
-        <p className="leading-[8px] mb-0">サイト紹介</p>
-        <p className="leading-[8px]">​</p>
-      </div>
-      <p className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[70px] not-italic text-[8px] text-black top-[17px] w-[8px]" style={{ fontFeatureSettings: '"dlig"' }}>コンセプト</p>
-      <p className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[24px] not-italic text-[8px] text-black top-[17px] w-[8px]" style={{ fontFeatureSettings: '"dlig"' }}>商品特集</p>
-      <p className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-0 not-italic text-[8px] text-black top-[17px] w-[8px]" style={{ fontFeatureSettings: '"dlig"' }}>作者紹介</p>
+      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-[92px]`} style={{ fontFeatureSettings: '"dlig"' }}>トップ</button>
+      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[0] left-[calc(50%-4px)]`} style={{ fontFeatureSettings: '"dlig"' }}>
+        <span className="block leading-[8px]">サイト紹介</span>
+      </button>
+      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-[70px]`} style={{ fontFeatureSettings: '"dlig"' }}>コンセプト</button>
+      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-[24px]`} style={{ fontFeatureSettings: '"dlig"' }}>商品特集</button>
+      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-0`} style={{ fontFeatureSettings: '"dlig"' }}>作者紹介</button>
     </div>
   );
 }
@@ -78,7 +79,7 @@ function Footer({ onNavigate }: { onNavigate: (page: "main") => void }) {
       {/* フッター main block */}
       <div className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[25px] h-[444.975px] items-start left-[calc(50%+1.94px)] top-[2596.03px]">
         <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] h-[196px] leading-[100px] min-w-full not-italic relative shrink-0 text-[100px] text-black w-[min-content]" style={{ fontFeatureSettings: '"dlig"' }}>骨霧</p>
-        <FooterNavContents />
+        <FooterNavContents onNavigate={onNavigate} />
         <FooterMessage />
       </div>
     </div>
