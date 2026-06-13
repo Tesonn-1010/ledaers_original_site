@@ -1,4 +1,4 @@
-import { useRef, type RefObject, type Ref } from "react";
+import { useRef, type Ref } from "react";
 import svgPaths from "../../imports/スマホデザインカンプMain最終版/svg-nkcp82ojx7";
 import img from "../../imports/スマホデザインカンプMain最終版/6a3050d00e701ea5527c626ec1519aa4e799bebd.png";
 import img1 from "../../imports/スマホデザインカンプMain最終版/ca73fb16c2782ab6be9974c944edcf320c673545.png";
@@ -150,7 +150,12 @@ function FooterMessage() {
   );
 }
 
-function FooterMain({ onSiteIntro, onConcept, onProduct, onAuthor }: FooterNavContentsProps) {
+function FooterMain({
+  onSiteIntro,
+  onConcept,
+  onProduct,
+  onAuthor,
+}: FooterNavContentsProps) {
   return (
     <div
       className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[25px] h-[445px] items-start left-[calc(50%+5.99px)] top-[4279px] w-[112px]"
@@ -417,11 +422,17 @@ function Pagination() {
 
 function KenbaikiSection({
   onNavigate,
+  sectionRef,
 }: {
   onNavigate: (page: "sub") => void;
+  sectionRef?: Ref<HTMLDivElement | null>;
 }) {
   return (
-    <div className="absolute contents left-0 top-[2517px]" data-name="商品紹介">
+    <div
+      ref={sectionRef}
+      className="absolute contents left-0 top-[2517px]"
+      data-name="商品紹介"
+    >
       <div className="absolute bg-black h-[843.001px] left-0 top-[2517px] w-[390px]" />
       <div
         className="absolute h-[843.001px] left-px top-[2518px] w-[389px]"
@@ -827,13 +838,13 @@ function FirstView({
 }
 
 export default function MainPage({ onNavigate }: Props) {
-  const firstViewRef = useRef<HTMLDivElement>(null);
-  const siteIntroRef = useRef<HTMLDivElement>(null);
-  const conceptRef = useRef<HTMLDivElement>(null);
-  const productRef = useRef<HTMLDivElement>(null);
-  const authorRef = useRef<HTMLDivElement>(null);
+  const firstViewRef = useRef<HTMLDivElement | null>(null);
+  const siteIntroRef = useRef<HTMLDivElement | null>(null);
+  const conceptRef = useRef<HTMLDivElement | null>(null);
+  const productRef = useRef<HTMLDivElement | null>(null);
+  const authorRef = useRef<HTMLDivElement | null>(null);
 
-  const scrollTo = (ref: RefObject<HTMLDivElement>) => {
+  const scrollTo = (ref: { current: HTMLDivElement | null }) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
