@@ -425,7 +425,7 @@ function KenbaikiSection({
   sectionRef,
 }: {
   onNavigate: (page: "sub") => void;
-  sectionRef?: Ref<HTMLDivElement | null>;
+  sectionRef?: Ref<HTMLDivElement>;
 }) {
   return (
     <div
