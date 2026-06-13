@@ -55,7 +55,12 @@ function FooterBackArrow({ onClick }: FooterBackArrowProps) {
   );
 }
 
-function FooterNavContents({ onSiteIntro, onConcept, onProduct, onAuthor }: FooterNavContentsProps) {
+function FooterNavContents({
+  onSiteIntro,
+  onConcept,
+  onProduct,
+  onAuthor,
+}: FooterNavContentsProps) {
   return (
     <div className="h-[60px] relative shrink-0 w-full" data-name="コンテンツ">
       <div className="absolute h-0 left-0 top-0 w-[100px]">
@@ -145,7 +150,7 @@ function FooterMessage() {
   );
 }
 
-function FooterMain() {
+function FooterMain({ onSiteIntro, onConcept, onProduct, onAuthor }: FooterNavContentsProps) {
   return (
     <div
       className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[25px] h-[445px] items-start left-[calc(50%+5.99px)] top-[4279px] w-[112px]"
@@ -157,26 +162,50 @@ function FooterMain() {
       >
         骨霧
       </p>
-      <FooterNavContents />
+      <FooterNavContents
+        onSiteIntro={onSiteIntro}
+        onConcept={onConcept}
+        onProduct={onProduct}
+        onAuthor={onAuthor}
+      />
       <FooterMessage />
     </div>
   );
 }
 
-function Footer() {
+interface FooterProps {
+  onGoTop: () => void;
+  onSiteIntro: () => void;
+  onConcept: () => void;
+  onProduct: () => void;
+  onAuthor: () => void;
+}
+
+function Footer({
+  onGoTop,
+  onSiteIntro,
+  onConcept,
+  onProduct,
+  onAuthor,
+}: FooterProps) {
   return (
     <div
       className="-translate-x-1/2 absolute contents left-[calc(50%-0.01px)] top-[4279px]"
       data-name="フッター"
     >
-      <FooterBackArrow />
+      <FooterBackArrow onClick={onGoTop} />
       <p
         className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[151px] leading-[40px] left-[calc(50%-84.01px)] not-italic text-[#9b7b3a] text-[16px] top-[4306px] w-[16px]"
         style={{ fontFeatureSettings: '"dlig"' }}
       >
         こつぎり
       </p>
-      <FooterMain />
+      <FooterMain
+        onSiteIntro={onSiteIntro}
+        onConcept={onConcept}
+        onProduct={onProduct}
+        onAuthor={onAuthor}
+      />
       <div className="absolute flex h-[1.631px] items-center justify-center left-[11.99px] top-[4279px] w-[366px]">
         <div className="flex-none rotate-[-179.74deg] skew-x-[0.26deg]">
           <div className="h-0 relative w-[366.003px]">
@@ -509,9 +538,10 @@ function GuideSection({ onNavigate }: { onNavigate: (page: "sub") => void }) {
   );
 }
 
-function SiteIntro() {
+function SiteIntro({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
   return (
     <div
+      ref={sectionRef}
       className="absolute contents left-[calc(50%-192px)] top-[1251px]"
       data-name="サイト紹介"
     >
@@ -740,7 +770,13 @@ function NoodleDecoration() {
   );
 }
 
-function FirstView({ sectionRef, conceptRef }: { sectionRef?: Ref<HTMLDivElement>; conceptRef?: Ref<HTMLDivElement> }) {
+function FirstView({
+  sectionRef,
+  conceptRef,
+}: {
+  sectionRef?: Ref<HTMLDivElement>;
+  conceptRef?: Ref<HTMLDivElement>;
+}) {
   return (
     <div
       ref={sectionRef}
@@ -794,6 +830,7 @@ export default function MainPage({ onNavigate }: Props) {
   const firstViewRef = useRef<HTMLDivElement>(null);
   const siteIntroRef = useRef<HTMLDivElement>(null);
   const conceptRef = useRef<HTMLDivElement>(null);
+  const productRef = useRef<HTMLDivElement>(null);
   const authorRef = useRef<HTMLDivElement>(null);
 
   const scrollTo = (ref: RefObject<HTMLDivElement>) => {
@@ -810,7 +847,7 @@ export default function MainPage({ onNavigate }: Props) {
         onGoTop={() => scrollTo(firstViewRef)}
         onSiteIntro={() => scrollTo(siteIntroRef)}
         onConcept={() => scrollTo(conceptRef)}
-        onProduct={() => scrollTo(siteIntroRef)}
+        onProduct={() => scrollTo(productRef)}
         onAuthor={() => scrollTo(authorRef)}
       />
       <PassionSection />
@@ -834,10 +871,10 @@ export default function MainPage({ onNavigate }: Props) {
         <p className="leading-[12px] mb-0">福岡出身・在住21年の学生。</p>
         <p className="leading-[12px]">地元の豚骨ラーメンを食べ続けてきた。</p>
       </div>
-      <KenbaikiSection onNavigate={onNavigate} />
+      <KenbaikiSection onNavigate={onNavigate} sectionRef={productRef} />
       <GuideSection onNavigate={onNavigate} />
-      <SiteIntro />
-      <FirstView />
+      <SiteIntro sectionRef={siteIntroRef} />
+      <FirstView sectionRef={firstViewRef} conceptRef={conceptRef} />
     </div>
   );
 }
