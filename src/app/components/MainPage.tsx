@@ -14,7 +14,18 @@ interface Props {
   passed: boolean;
   onPass: () => void;
   onReset: () => void;
+  scrollRoot: React.RefObject<HTMLDivElement | null>;
 }
+
+// 文字を1つずつ表示する設定（スクロールで入ってきたら発火）。customに表示順を渡す。
+const charReveal = {
+  hidden: { opacity: 0, y: 8 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.12, duration: 0.25, ease: "easeOut" as const },
+  }),
+};
 
 interface FooterBackArrowProps {
   onClick: () => void;
@@ -455,7 +466,13 @@ function KenbaikiSection({
   );
 }
 
-function GuideSection({ onNavigate }: { onNavigate: (page: "sub") => void }) {
+function GuideSection({
+  onNavigate,
+  scrollRoot,
+}: {
+  onNavigate: (page: "sub") => void;
+  scrollRoot?: React.RefObject<HTMLDivElement | null>;
+}) {
   return (
     <div className="absolute contents left-px top-[1673px]" data-name="誘導">
       <div
@@ -484,40 +501,50 @@ function GuideSection({ onNavigate }: { onNavigate: (page: "sub") => void }) {
           </div>
         </div>
         <div className="absolute bg-[#dedbd4] h-[844px] left-0 top-0 w-[389px]" />
-        <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Yuji_Syuku',sans-serif] gap-[4px] items-start leading-[normal] left-[155px] not-italic text-[32px] text-black top-[153px] whitespace-nowrap">
+        <motion.div
+          className="[word-break:break-word] absolute content-stretch flex flex-col font-['Yuji_Syuku',sans-serif] gap-[4px] items-start leading-[normal] left-[155px] not-italic text-[32px] text-black top-[153px] whitespace-nowrap"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.9, margin: "0px 0px -30% 0px", root: scrollRoot }}
+        >
           <p className="relative shrink-0">{`　`}</p>
           <p className="relative shrink-0">{`　`}</p>
-          <p className="relative shrink-0">選</p>
-          <p className="relative shrink-0">ん</p>
-          <p className="relative shrink-0">で</p>
-          <p className="relative shrink-0">く</p>
-          <p className="relative shrink-0">だ</p>
-          <p className="relative shrink-0">さ</p>
-          <p className="relative shrink-0">い</p>
-        </div>
-        <div className="absolute content-stretch flex flex-col gap-[4px] items-start left-[203px] top-[152px]">
-          <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          <motion.p custom={8} variants={charReveal} className="relative shrink-0">選</motion.p>
+          <motion.p custom={9} variants={charReveal} className="relative shrink-0">ん</motion.p>
+          <motion.p custom={10} variants={charReveal} className="relative shrink-0">で</motion.p>
+          <motion.p custom={11} variants={charReveal} className="relative shrink-0">く</motion.p>
+          <motion.p custom={12} variants={charReveal} className="relative shrink-0">だ</motion.p>
+          <motion.p custom={13} variants={charReveal} className="relative shrink-0">さ</motion.p>
+          <motion.p custom={14} variants={charReveal} className="relative shrink-0">い</motion.p>
+        </motion.div>
+        <motion.div
+          className="absolute content-stretch flex flex-col gap-[4px] items-start left-[203px] top-[152px]"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.9, margin: "0px 0px -30% 0px", root: scrollRoot }}
+        >
+          <motion.p custom={0} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
             あ
-          </p>
-          <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          </motion.p>
+          <motion.p custom={1} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
             な
-          </p>
-          <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          </motion.p>
+          <motion.p custom={2} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
             た
-          </p>
-          <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          </motion.p>
+          <motion.p custom={3} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
             の
-          </p>
-          <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
+          </motion.p>
+          <motion.p custom={4} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
             一
-          </p>
-          <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
+          </motion.p>
+          <motion.p custom={5} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
             杯
-          </p>
-          <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
+          </motion.p>
+          <motion.p custom={6} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
             を
-          </p>
-          <div className="content-stretch flex flex-col h-[16px] items-center relative shrink-0 w-[32px]">
+          </motion.p>
+          <motion.div custom={7} variants={charReveal} className="content-stretch flex flex-col h-[16px] items-center relative shrink-0 w-[32px]">
             <div className="flex items-center justify-center relative shrink-0">
               <div className="flex-none rotate-180">
                 <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
@@ -525,8 +552,8 @@ function GuideSection({ onNavigate }: { onNavigate: (page: "sub") => void }) {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
       <div className="absolute flex h-[150px] items-center justify-center left-[calc(50%-19px)] top-[2337px] w-[40px]">
         <div className="flex-none rotate-90">
@@ -975,7 +1002,7 @@ function FirstView({
   );
 }
 
-export default function MainPage({ onNavigate, passed, onPass, onReset }: Props) {
+export default function MainPage({ onNavigate, passed, onPass, onReset, scrollRoot }: Props) {
   const firstViewRef = useRef<HTMLDivElement | null>(null);
   const siteIntroRef = useRef<HTMLDivElement | null>(null);
   const conceptRef = useRef<HTMLDivElement | null>(null);
@@ -1002,59 +1029,54 @@ export default function MainPage({ onNavigate, passed, onPass, onReset }: Props)
       animate={passed ? { scale: [1, 1.07, 1] } : { scale: 1 }}
       transition={passed ? { duration: 1.5, ease: "easeInOut", times: [0, 0.45, 1] } : { duration: 0 }}
     >
-      <Footer
-        onGoTop={onReset}
-        onSiteIntro={() => scrollTo(siteIntroRef)}
-        onConcept={() => scrollTo(conceptRef)}
-        onProduct={() => scrollTo(productRef)}
-        onAuthor={() => scrollTo(authorRef)}
-      />
-      <PassionSection sectionRef={conceptRef} />
-      <div
-        ref={authorRef}
-        className="-translate-x-1/2 absolute left-1/2 size-[296px] top-[3438px]"
-        data-name="作者写真"
+      {/* 本編レイヤー（背面）。入店するまで隠れていて、奥から手前にせり出して現れる */}
+      <motion.div
+        className="absolute left-0 top-0 h-[4770px] w-[390px]"
+        style={{
+          transformOrigin: "50% 1300px",
+          pointerEvents: passed ? "auto" : "none",
+        }}
+        initial={false}
+        animate={passed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.86 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: passed ? 0.45 : 0 }}
       >
-        <img
-          alt="作者写真"
-          className="absolute block inset-0 max-w-none size-full"
-          height="296"
-          src={img}
-          width="296"
+        <Footer
+          onGoTop={onReset}
+          onSiteIntro={() => scrollTo(siteIntroRef)}
+          onConcept={() => scrollTo(conceptRef)}
+          onProduct={() => scrollTo(productRef)}
+          onAuthor={() => scrollTo(authorRef)}
         />
-      </div>
-      <div
-        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%-148px)] not-italic opacity-70 text-[9px] text-black top-[3740px] w-[162px]"
-        style={{ fontFeatureSettings: '"dlig"' }}
-      >
-        <p className="leading-[12px] mb-0">福岡出身・在住21年の学生。</p>
-        <p className="leading-[12px]">地元の豚骨ラーメンを食べ続けてきた。</p>
-      </div>
-      <KenbaikiSection onNavigate={onNavigate} sectionRef={productRef} />
-      <GuideSection onNavigate={onNavigate} />
-      <SiteIntro sectionRef={siteIntroRef} revealed={passed} />
+        <PassionSection sectionRef={conceptRef} />
+        <div
+          ref={authorRef}
+          className="-translate-x-1/2 absolute left-1/2 size-[296px] top-[3438px]"
+          data-name="作者写真"
+        >
+          <img
+            alt="作者写真"
+            className="absolute block inset-0 max-w-none size-full"
+            height="296"
+            src={img}
+            width="296"
+          />
+        </div>
+        <div
+          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%-148px)] not-italic opacity-70 text-[9px] text-black top-[3740px] w-[162px]"
+          style={{ fontFeatureSettings: '"dlig"' }}
+        >
+          <p className="leading-[12px] mb-0">福岡出身・在住21年の学生。</p>
+          <p className="leading-[12px]">地元の豚骨ラーメンを食べ続けてきた。</p>
+        </div>
+        <KenbaikiSection onNavigate={onNavigate} sectionRef={productRef} />
+        <GuideSection onNavigate={onNavigate} scrollRoot={scrollRoot} />
+        <SiteIntro sectionRef={siteIntroRef} revealed />
+      </motion.div>
+      {/* ファーストビュー（前面の表紙）。入店すると消える */}
       <FirstView
         sectionRef={firstViewRef}
         passed={passed}
         onPass={onPass}
-      />
-      {/* のれんから下を隠す目隠し。くぐると上へめくれて消える */}
-      <motion.div
-        className="absolute left-0 z-30 w-full bg-[#f2ede4]"
-        style={{
-          top: "1250px",
-          height: "3520px",
-          transformOrigin: "top center",
-          pointerEvents: passed ? "none" : "auto",
-        }}
-        initial={false}
-        animate={passed ? { opacity: 0 } : { opacity: 1 }}
-        transition={{
-          duration: 1.2,
-          ease: "easeInOut",
-          delay: passed ? 0.6 : 0,
-        }}
-        aria-hidden
       />
     </motion.div>
   );
