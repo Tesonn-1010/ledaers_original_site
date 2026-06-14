@@ -1,4 +1,4 @@
-import { useRef, type Ref } from "react";
+import { useRef, useEffect, type Ref } from "react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/スマホデザインカンプMain最終版/svg-nkcp82ojx7";
 import img from "../../imports/スマホデザインカンプMain最終版/6a3050d00e701ea5527c626ec1519aa4e799bebd.png";
@@ -13,6 +13,7 @@ interface Props {
   onNavigate: (page: "sub") => void;
   passed: boolean;
   onPass: () => void;
+  onReset: () => void;
 }
 
 interface FooterBackArrowProps {
@@ -287,9 +288,10 @@ function PassionMessage() {
   );
 }
 
-function PassionSection() {
+function PassionSection({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
   return (
     <div
+      ref={sectionRef}
       className="-translate-x-1/2 -translate-y-1/2 absolute h-[304px] left-[calc(50%-1px)] top-[calc(50%+1591.5px)] w-[326px]"
       data-name="熱意メッセージ"
     >
@@ -924,12 +926,10 @@ function NorenGate({
 
 function FirstView({
   sectionRef,
-  conceptRef,
   passed,
   onPass,
 }: {
   sectionRef?: Ref<HTMLDivElement>;
-  conceptRef?: Ref<HTMLDivElement>;
   passed: boolean;
   onPass: () => void;
 }) {
@@ -938,35 +938,44 @@ function FirstView({
       className="absolute contents left-[-1px] top-0"
       data-name="ファーストビュー"
     >
-      <div ref={sectionRef} className="absolute bg-[#f2ede4] h-[1250.169px] left-[10px] top-0 w-[373px]" />
-      <ConceptSection sectionRef={conceptRef} />
-      <NoodleDecoration />
-      {/* Title 骨霧 */}
-      <div className="-translate-x-1/2 absolute h-[287px] left-[calc(50%-2px)] top-[17px] w-[120px]">
-        <div className="-translate-x-1/2 [word-break:break-word] absolute content-stretch flex flex-col font-['Yuji_Syuku',sans-serif] gap-[10px] h-[600px] items-center justify-center leading-[200px] left-[calc(50%+2px)] not-italic text-[200px] text-black top-[-31px] whitespace-nowrap">
-          <p className="relative shrink-0">骨</p>
-          <p className="relative shrink-0">霧</p>
-        </div>
-      </div>
       {/* のれんゲート（くぐると下が現れる） */}
       <NorenGate passed={passed} onPass={onPass} />
-      <p
-        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[310px] leading-[normal] left-[calc(50%+121px)] not-italic text-[#9b7b3a] text-[20px] top-[44px] w-[20px]"
-        style={{ fontFeatureSettings: '"vert"' }}
+      {/* 入口（表紙）のヒーロー。入店すると消えて本編へ */}
+      <motion.div
+        className="absolute left-0 top-0 h-[1250px] w-[390px]"
+        initial={false}
+        animate={passed ? { opacity: 0 } : { opacity: 1 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: passed ? 0.5 : 0 }}
+        style={{ pointerEvents: passed ? "none" : "auto" }}
       >
-        福岡豚骨ラーメンサイト
-      </p>
-      <p
-        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[60px] left-[calc(50%-149px)] not-italic text-[#9b7b3a] text-[24px] top-[186px] w-[24px]"
-        style={{ fontFeatureSettings: '"dlig"' }}
-      >
-        こつぎり
-      </p>
+        <div ref={sectionRef} className="absolute bg-[#f2ede4] h-[1250.169px] left-[10px] top-0 w-[373px]" />
+        <ConceptSection />
+        <NoodleDecoration />
+        {/* Title 骨霧 */}
+        <div className="-translate-x-1/2 absolute h-[287px] left-[calc(50%-2px)] top-[17px] w-[120px]">
+          <div className="-translate-x-1/2 [word-break:break-word] absolute content-stretch flex flex-col font-['Yuji_Syuku',sans-serif] gap-[10px] h-[600px] items-center justify-center leading-[200px] left-[calc(50%+2px)] not-italic text-[200px] text-black top-[-31px] whitespace-nowrap">
+            <p className="relative shrink-0">骨</p>
+            <p className="relative shrink-0">霧</p>
+          </div>
+        </div>
+        <p
+          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[310px] leading-[normal] left-[calc(50%+121px)] not-italic text-[#9b7b3a] text-[20px] top-[44px] w-[20px]"
+          style={{ fontFeatureSettings: '"vert"' }}
+        >
+          福岡豚骨ラーメンサイト
+        </p>
+        <p
+          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[60px] left-[calc(50%-149px)] not-italic text-[#9b7b3a] text-[24px] top-[186px] w-[24px]"
+          style={{ fontFeatureSettings: '"dlig"' }}
+        >
+          こつぎり
+        </p>
+      </motion.div>
     </div>
   );
 }
 
-export default function MainPage({ onNavigate, passed, onPass }: Props) {
+export default function MainPage({ onNavigate, passed, onPass, onReset }: Props) {
   const firstViewRef = useRef<HTMLDivElement | null>(null);
   const siteIntroRef = useRef<HTMLDivElement | null>(null);
   const conceptRef = useRef<HTMLDivElement | null>(null);
@@ -976,6 +985,13 @@ export default function MainPage({ onNavigate, passed, onPass }: Props) {
   const scrollTo = (ref: { current: HTMLDivElement | null }) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  // 入店：のれんを抜けたら本編（サイト紹介）へ送り込む
+  useEffect(() => {
+    if (!passed) return;
+    const t = setTimeout(() => scrollTo(siteIntroRef), 1500);
+    return () => clearTimeout(t);
+  }, [passed]);
 
   return (
     <motion.div
@@ -987,13 +1003,13 @@ export default function MainPage({ onNavigate, passed, onPass }: Props) {
       transition={passed ? { duration: 1.5, ease: "easeInOut", times: [0, 0.45, 1] } : { duration: 0 }}
     >
       <Footer
-        onGoTop={() => scrollTo(firstViewRef)}
+        onGoTop={onReset}
         onSiteIntro={() => scrollTo(siteIntroRef)}
         onConcept={() => scrollTo(conceptRef)}
         onProduct={() => scrollTo(productRef)}
         onAuthor={() => scrollTo(authorRef)}
       />
-      <PassionSection />
+      <PassionSection sectionRef={conceptRef} />
       <div
         ref={authorRef}
         className="-translate-x-1/2 absolute left-1/2 size-[296px] top-[3438px]"
@@ -1019,7 +1035,6 @@ export default function MainPage({ onNavigate, passed, onPass }: Props) {
       <SiteIntro sectionRef={siteIntroRef} revealed={passed} />
       <FirstView
         sectionRef={firstViewRef}
-        conceptRef={conceptRef}
         passed={passed}
         onPass={onPass}
       />

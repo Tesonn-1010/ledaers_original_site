@@ -18,6 +18,12 @@ export default function App() {
     scrollRef.current?.scrollTo({ top: 0 });
   };
 
+  // 最初に戻る：入店状態を解除して表紙（ファーストビュー）へ戻す
+  const resetEntrance = () => {
+    scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    setPassed(false);
+  };
+
   // 入店前（メイン画面・未くぐり）は、のれんより下へスクロールできないようにする
   useEffect(() => {
     const el = scrollRef.current;
@@ -43,6 +49,7 @@ export default function App() {
             onNavigate={navigate}
             passed={passed}
             onPass={() => setPassed(true)}
+            onReset={resetEntrance}
           />
         ) : (
           <SubPage onNavigate={navigate} />
