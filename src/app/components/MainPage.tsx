@@ -444,11 +444,11 @@ function KenbaikiSection({
   sectionRef?: Ref<HTMLDivElement>;
 }) {
   return (
-    <div
-      className="absolute contents left-0 top-[2517px]"
-      data-name="商品紹介"
-    >
-      <div ref={sectionRef} className="absolute bg-black h-[843.001px] left-0 top-[2517px] w-[390px]" />
+    <div className="absolute contents left-0 top-[2517px]" data-name="商品紹介">
+      <div
+        ref={sectionRef}
+        className="absolute bg-black h-[843.001px] left-0 top-[2517px] w-[390px]"
+      />
       <div
         className="absolute h-[843.001px] left-px top-[2518px] w-[389px]"
         data-name="券売機"
@@ -511,46 +511,130 @@ function GuideSection({
           className="[word-break:break-word] absolute content-stretch flex flex-col font-['Yuji_Syuku',sans-serif] gap-[4px] items-start leading-[normal] left-[155px] not-italic text-[32px] text-black top-[153px] whitespace-nowrap"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.9, margin: "0px 0px -30% 0px", root: scrollRoot }}
+          viewport={{
+            once: true,
+            amount: 0.9,
+            margin: "0px 0px -30% 0px",
+            root: scrollRoot,
+          }}
         >
           <p className="relative shrink-0">{`　`}</p>
           <p className="relative shrink-0">{`　`}</p>
-          <motion.p custom={8} variants={charReveal} className="relative shrink-0">選</motion.p>
-          <motion.p custom={9} variants={charReveal} className="relative shrink-0">ん</motion.p>
-          <motion.p custom={10} variants={charReveal} className="relative shrink-0">で</motion.p>
-          <motion.p custom={11} variants={charReveal} className="relative shrink-0">く</motion.p>
-          <motion.p custom={12} variants={charReveal} className="relative shrink-0">だ</motion.p>
-          <motion.p custom={13} variants={charReveal} className="relative shrink-0">さ</motion.p>
-          <motion.p custom={14} variants={charReveal} className="relative shrink-0">い</motion.p>
+          <motion.p
+            custom={8}
+            variants={charReveal}
+            className="relative shrink-0"
+          >
+            選
+          </motion.p>
+          <motion.p
+            custom={9}
+            variants={charReveal}
+            className="relative shrink-0"
+          >
+            ん
+          </motion.p>
+          <motion.p
+            custom={10}
+            variants={charReveal}
+            className="relative shrink-0"
+          >
+            で
+          </motion.p>
+          <motion.p
+            custom={11}
+            variants={charReveal}
+            className="relative shrink-0"
+          >
+            く
+          </motion.p>
+          <motion.p
+            custom={12}
+            variants={charReveal}
+            className="relative shrink-0"
+          >
+            だ
+          </motion.p>
+          <motion.p
+            custom={13}
+            variants={charReveal}
+            className="relative shrink-0"
+          >
+            さ
+          </motion.p>
+          <motion.p
+            custom={14}
+            variants={charReveal}
+            className="relative shrink-0"
+          >
+            い
+          </motion.p>
         </motion.div>
         <motion.div
           className="absolute content-stretch flex flex-col gap-[4px] items-start left-[203px] top-[152px]"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.9, margin: "0px 0px -30% 0px", root: scrollRoot }}
+          viewport={{
+            once: true,
+            amount: 0.9,
+            margin: "0px 0px -30% 0px",
+            root: scrollRoot,
+          }}
         >
-          <motion.p custom={0} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          <motion.p
+            custom={0}
+            variants={charReveal}
+            className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap"
+          >
             あ
           </motion.p>
-          <motion.p custom={1} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          <motion.p
+            custom={1}
+            variants={charReveal}
+            className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap"
+          >
             な
           </motion.p>
-          <motion.p custom={2} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          <motion.p
+            custom={2}
+            variants={charReveal}
+            className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap"
+          >
             た
           </motion.p>
-          <motion.p custom={3} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap">
+          <motion.p
+            custom={3}
+            variants={charReveal}
+            className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[normal] not-italic relative shrink-0 text-[32px] text-black whitespace-nowrap"
+          >
             の
           </motion.p>
-          <motion.p custom={4} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
+          <motion.p
+            custom={4}
+            variants={charReveal}
+            className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap"
+          >
             一
           </motion.p>
-          <motion.p custom={5} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
+          <motion.p
+            custom={5}
+            variants={charReveal}
+            className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap"
+          >
             杯
           </motion.p>
-          <motion.p custom={6} variants={charReveal} className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
+          <motion.p
+            custom={6}
+            variants={charReveal}
+            className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative shrink-0 text-[32px] text-black tracking-[-0.32px] whitespace-nowrap"
+          >
             を
           </motion.p>
-          <motion.div custom={7} variants={charReveal} className="content-stretch flex flex-col h-[16px] items-center relative shrink-0 w-[32px]">
+          <motion.div
+            custom={7}
+            variants={charReveal}
+            className="content-stretch flex flex-col h-[16px] items-center relative shrink-0 w-[32px]"
+          >
             <div className="flex items-center justify-center relative shrink-0">
               <div className="flex-none rotate-180">
                 <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] leading-[99.885%] not-italic relative text-[32px] text-black tracking-[-0.32px] whitespace-nowrap">
@@ -770,10 +854,13 @@ function SiteIntro({
 function ConceptSection({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
   return (
     <div
-      className="-translate-x-1/2 absolute contents left-[calc(50%-1px)] top-[729.77px]"
+      className="-translate-x-1/2 absolute contents left-[calc(50%-1px)] top-[700px]"
       data-name="コンセプト"
     >
-      <div ref={sectionRef} className="-translate-x-1/2 absolute h-[243.228px] left-[calc(50%-1px)] top-[729.77px] w-[390px]">
+      <div
+        ref={sectionRef}
+        className="-translate-x-1/2 absolute h-[243.228px] left-[calc(50%-1px)] top-[700px] w-[390px]"
+      >
         <div className="absolute bg-[#f2ede4] h-[225px] left-px top-0 w-[389px]" />
         <div className="-translate-x-1/2 [word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[154px] leading-[24px] left-[calc(50%+1px)] not-italic text-[#c0321a] text-[24px] top-[40px] w-[212px]">
           <p
@@ -808,7 +895,7 @@ function ConceptSection({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
 
 function NoodleDecoration() {
   return (
-    <div className="absolute h-[115.041px] left-0 top-[555.42px] w-[389.5px]">
+    <div className="absolute h-[115.041px] left-[30px] top-[500px] w-[330px]">
       <div className="absolute inset-[-0.43%_-0.13%_-0.43%_-0.12%]">
         <svg
           className="block size-full"
@@ -923,7 +1010,7 @@ function NorenGate({
   };
 
   return (
-    <div className="-translate-x-1/2 absolute left-1/2 top-[1067px] z-40 h-[230px] w-[392px]">
+    <div className="-translate-x-1/2 absolute left-1/2 top-[1020px] z-40 h-[230px] w-[392px]">
       {/* くぐる前：上から布が下りるリベール */}
       <motion.div
         className="absolute inset-0"
@@ -940,7 +1027,7 @@ function NorenGate({
         <button
           type="button"
           onClick={onPass}
-          aria-label="暖簾をくぐる"
+          aria-label="ここをタップして入店する"
           className="absolute left-0 top-0 z-50 h-[200px] w-full cursor-pointer bg-transparent"
         >
           <motion.span
@@ -949,7 +1036,7 @@ function NorenGate({
             animate={{ opacity: [0.4, 1, 0.4], y: [0, 3, 0] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
           >
-            暖簾をくぐる ▼
+            ここをタップして入店 ▼
           </motion.span>
         </button>
       )}
@@ -983,7 +1070,10 @@ function FirstView({
         transition={{ duration: 1, ease: "easeInOut", delay: passed ? 0.5 : 0 }}
         style={{ pointerEvents: passed ? "none" : "auto" }}
       >
-        <div ref={sectionRef} className="absolute bg-[#f2ede4] h-[1250.169px] left-[10px] top-0 w-[373px]" />
+        <div
+          ref={sectionRef}
+          className="absolute bg-[#f2ede4] h-[1250.169px] left-[10px] top-0 w-[373px]"
+        />
         <ConceptSection sectionRef={conceptRef} />
         <NoodleDecoration />
         {/* Title 骨霧 */}
@@ -1010,7 +1100,14 @@ function FirstView({
   );
 }
 
-export default function MainPage({ onNavigate, passed, onPass, onReset, onExitEntrance, scrollRoot }: Props) {
+export default function MainPage({
+  onNavigate,
+  passed,
+  onPass,
+  onReset,
+  onExitEntrance,
+  scrollRoot,
+}: Props) {
   const firstViewRef = useRef<HTMLDivElement | null>(null);
   const siteIntroRef = useRef<HTMLDivElement | null>(null);
   const conceptRef = useRef<HTMLDivElement | null>(null);
@@ -1038,11 +1135,19 @@ export default function MainPage({ onNavigate, passed, onPass, onReset, onExitEn
   return (
     <motion.div
       className="bg-[#f2ede4] relative"
-      style={{ width: "390px", height: "4770px", transformOrigin: "50% 1167px" }}
+      style={{
+        width: "390px",
+        height: "4770px",
+        transformOrigin: "50% 1167px",
+      }}
       data-name="スマホデザインカンプ(main)_最終版"
       // 入店：のれんを抜けた瞬間、店内へ一歩踏み込むように画面が前へ寄る
       animate={passed ? { scale: [1, 1.07, 1] } : { scale: 1 }}
-      transition={passed ? { duration: 1.5, ease: "easeInOut", times: [0, 0.45, 1] } : { duration: 0 }}
+      transition={
+        passed
+          ? { duration: 1.5, ease: "easeInOut", times: [0, 0.45, 1] }
+          : { duration: 0 }
+      }
     >
       {/* 本編レイヤー（背面）。入店するまで隠れていて、奥から手前にせり出して現れる */}
       <motion.div
@@ -1052,8 +1157,14 @@ export default function MainPage({ onNavigate, passed, onPass, onReset, onExitEn
           pointerEvents: passed ? "auto" : "none",
         }}
         initial={false}
-        animate={passed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.86 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: passed ? 0.45 : 0 }}
+        animate={
+          passed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.86 }
+        }
+        transition={{
+          duration: 1.1,
+          ease: [0.16, 1, 0.3, 1],
+          delay: passed ? 0.45 : 0,
+        }}
       >
         <Footer
           onGoTop={onReset}
