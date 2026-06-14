@@ -1141,7 +1141,9 @@ export default function MainPage({
         transformOrigin: "50% 1167px",
       }}
       data-name="スマホデザインカンプ(main)_最終版"
-      // 入店：のれんを抜けた瞬間、店内へ一歩踏み込むように画面が前へ寄る
+      // 入店：のれんを抜けた瞬間、店内へ一歩踏み込むように画面が前へ寄る。
+      // initial={false}でマウント時（サブ→メイン遷移）は再生せず、くぐった時だけズームする。
+      initial={false}
       animate={passed ? { scale: [1, 1.07, 1] } : { scale: 1 }}
       transition={
         passed
