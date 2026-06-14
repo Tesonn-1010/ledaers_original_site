@@ -848,15 +848,16 @@ function NorenGate({
         animate={
           passed
             ? {
-                x: isLeft ? "-120%" : "120%",
-                y: "-18%",
-                rotate: isLeft ? -5 : 5,
+                x: isLeft ? "-150%" : "150%",
+                y: "-28%",
+                scale: 1.7,
+                rotate: isLeft ? -7 : 7,
                 opacity: 0,
               }
-            : { x: 0, y: 0, rotate: 0, opacity: 1 }
+            : { x: 0, y: 0, scale: 1, rotate: 0, opacity: 1 }
         }
         transition={
-          passed ? { duration: 1.6, ease: [0.7, 0, 0.3, 1] } : { duration: 0.5 }
+          passed ? { duration: 1.6, ease: [0.6, 0, 0.2, 1] } : { duration: 0.5 }
         }
       >
         {/* 風にゆれる（くぐる前のみ） */}
@@ -975,10 +976,13 @@ export default function MainPage({ onNavigate, passed, onPass }: Props) {
   };
 
   return (
-    <div
+    <motion.div
       className="bg-[#f2ede4] relative"
-      style={{ width: "390px", height: "4770px" }}
+      style={{ width: "390px", height: "4770px", transformOrigin: "50% 1167px" }}
       data-name="スマホデザインカンプ(main)_最終版"
+      // 入店：のれんを抜けた瞬間、店内へ一歩踏み込むように画面が前へ寄る
+      animate={passed ? { scale: [1, 1.07, 1] } : { scale: 1 }}
+      transition={passed ? { duration: 1.5, ease: "easeInOut", times: [0, 0.45, 1] } : { duration: 0 }}
     >
       <Footer
         onGoTop={() => scrollTo(firstViewRef)}
@@ -1035,6 +1039,6 @@ export default function MainPage({ onNavigate, passed, onPass }: Props) {
         }}
         aria-hidden
       />
-    </div>
+    </motion.div>
   );
 }

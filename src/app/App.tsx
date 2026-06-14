@@ -35,7 +35,7 @@ export default function App() {
     <div className="min-h-screen bg-[#f2ede4] flex justify-center">
       <div
         ref={scrollRef}
-        className="overflow-x-hidden overflow-y-auto"
+        className="no-scrollbar overflow-x-hidden overflow-y-auto"
         style={{ width: "390px", height: "100vh" }}
       >
         {page === "main" ? (
