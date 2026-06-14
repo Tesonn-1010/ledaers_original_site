@@ -55,7 +55,7 @@ export default function App() {
             scrollRoot={scrollRef}
           />
         ) : (
-          <SubPage onNavigate={navigate} />
+          <SubPage onNavigate={navigate} scrollRoot={scrollRef} />
         )}
       </div>
     </div>

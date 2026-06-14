@@ -4,9 +4,10 @@ import img from "../../imports/スマホデザインカンプSub最終版/7b565c
 
 interface Props {
   onNavigate: (page: "main") => void;
+  scrollRoot: React.RefObject<HTMLDivElement | null>;
 }
 
-function FooterBackArrow({ onNavigate }: { onNavigate: (page: "main") => void }) {
+function FooterBackArrow({ onTop }: { onTop: () => void }) {
   return (
     <div className="absolute contents left-[calc(50%+126px)] top-[2944px]" data-name="戻る矢印">
       <div className="absolute h-[90.897px] left-[calc(50%+126px)] top-[2944px] w-0">
@@ -17,7 +18,7 @@ function FooterBackArrow({ onNavigate }: { onNavigate: (page: "main") => void })
         </div>
       </div>
       <button
-        onClick={() => onNavigate("main")}
+        onClick={onTop}
         className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[50px] leading-[10px] left-[calc(50%+128px)] not-italic text-[10px] text-black top-[2986px] w-[10px] bg-transparent border-none cursor-pointer p-0"
       >
         最初に戻る
@@ -60,10 +61,10 @@ function FooterMessage() {
   );
 }
 
-function Footer({ onNavigate }: { onNavigate: (page: "main") => void }) {
+function Footer({ onNavigate, onTop }: { onNavigate: (page: "main") => void; onTop: () => void }) {
   return (
     <div className="-translate-x-1/2 absolute contents left-[calc(50%+1.92px)] top-[2577.01px]" data-name="フッター">
-      <FooterBackArrow onNavigate={onNavigate} />
+      <FooterBackArrow onTop={onTop} />
       <div className="absolute flex h-[1.631px] items-center justify-center left-[calc(50%-181.08px)] top-[2577.01px] w-[366px]">
         <div className="flex-none rotate-[-179.74deg] skew-x-[0.26deg]">
           <div className="h-0 relative w-[366.003px]">
@@ -265,10 +266,12 @@ function FirstView() {
   );
 }
 
-export default function SubPage({ onNavigate }: Props) {
+export default function SubPage({ onNavigate, scrollRoot }: Props) {
+  const scrollTop = () =>
+    scrollRoot.current?.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <div className="bg-[#f2ede4] relative" style={{ width: "390px", height: "3200px" }} data-name="スマホデザインカンプ(sub)_最終版">
-      <Footer onNavigate={onNavigate} />
+      <Footer onNavigate={onNavigate} onTop={scrollTop} />
       <TipsSection />
       <WaitTimeSection />
       <EatMethodSection />
