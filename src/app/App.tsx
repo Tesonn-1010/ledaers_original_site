@@ -51,6 +51,7 @@ export default function App() {
             passed={passed}
             onPass={() => setPassed(true)}
             onReset={resetEntrance}
+            onExitEntrance={() => setPassed(false)}
             scrollRoot={scrollRef}
           />
         ) : (

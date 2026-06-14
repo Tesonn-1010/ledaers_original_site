@@ -198,7 +198,7 @@ function WaitTimeSection() {
 
 function EatMethodSection() {
   return (
-    <div className="-translate-x-1/2 absolute drop-shadow-[0px_4px_2px_rgba(0,0,0,0.25)] h-[461px] left-[calc(50%+0.5px)] top-[1294px] w-[365px]" data-name="最強の食べ方">
+    <div className="-translate-x-1/2 absolute bg-black drop-shadow-[0px_4px_2px_rgba(0,0,0,0.25)] h-[461px] left-[calc(50%+0.5px)] top-[1294px] w-[365px]" data-name="最強の食べ方">
       <p className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] inset-[8.93%_12.88%_58.93%_80.55%] leading-[24px] not-italic text-[#c0321a] text-[24px]">最強の食べ方</p>
       <div className="[word-break:break-word] absolute h-[351px] left-[38px] not-italic text-[#9b7b3a] top-[51px] w-[250px]">
         {/* 数字 */}

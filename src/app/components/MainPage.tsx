@@ -14,6 +14,7 @@ interface Props {
   passed: boolean;
   onPass: () => void;
   onReset: () => void;
+  onExitEntrance: () => void;
   scrollRoot: React.RefObject<HTMLDivElement | null>;
 }
 
@@ -96,25 +97,24 @@ function FooterNavContents({
       </div>
       <button
         type="button"
-        onClick={onSiteIntro}
-        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%+15px)] not-italic text-[8px] text-black top-[17px] w-[8px] cursor-pointer bg-transparent border-none p-0"
-        style={{ fontFeatureSettings: '"dlig"' }}
-      >
-        <p className="leading-[8px] mb-0">サイト紹介</p>
-        <p className="leading-[8px]">​</p>
-      </button>
-      <button
-        type="button"
         onClick={onConcept}
-        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[92px] not-italic text-[8px] text-black top-[17px] w-[8px] cursor-pointer bg-transparent border-none p-0"
+        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[93px] not-italic text-[8px] text-black top-[17px] w-[8px] cursor-pointer bg-transparent border-none p-0"
         style={{ fontFeatureSettings: '"dlig"' }}
       >
         コンセプト
       </button>
       <button
         type="button"
+        onClick={onSiteIntro}
+        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[62px] not-italic text-[8px] text-black top-[17px] w-[8px] cursor-pointer bg-transparent border-none p-0"
+        style={{ fontFeatureSettings: '"dlig"' }}
+      >
+        サイト紹介
+      </button>
+      <button
+        type="button"
         onClick={onProduct}
-        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[31px] not-italic text-[8px] text-black top-[18px] w-[8px] cursor-pointer bg-transparent border-none p-0"
+        className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[8px] left-[31px] not-italic text-[8px] text-black top-[17px] w-[8px] cursor-pointer bg-transparent border-none p-0"
         style={{ fontFeatureSettings: '"dlig"' }}
       >
         商品特集
@@ -454,6 +454,12 @@ function KenbaikiSection({
         data-name="券売機"
       >
         <p
+          className="absolute font-['Noto_Sans_JP',sans-serif] font-medium left-[calc(50%-117px)] not-italic text-[#9b7b3a] text-[11px] top-[26px] whitespace-nowrap"
+          style={{ letterSpacing: "0.45em" }}
+        >
+          RAMEN MENU
+        </p>
+        <p
           className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[80px] left-[calc(50%-119.5px)] not-italic text-[#9b7b3a] text-[80px] text-justify top-[44px] whitespace-nowrap"
           style={{ fontFeatureSettings: '"dlig"' }}
         >
@@ -671,7 +677,7 @@ function SiteIntro({
             </svg>
           </div>
         </div>
-        <div className="-translate-x-1/2 [word-break:break-word] absolute content-stretch flex flex-col gap-[5px] items-center left-[calc(50%+0.5px)] not-italic text-[#9b7b3a] text-justify top-[94px] w-[132px] whitespace-nowrap">
+        <div className="-translate-x-1/2 [word-break:break-word] absolute content-stretch flex flex-col gap-[5px] items-center left-[calc(50%+0.5px)] not-italic text-[#2e2117] text-justify top-[94px] w-[132px] whitespace-nowrap">
           <p className="font-['Yuji_Syuku',sans-serif] leading-[normal] relative shrink-0 text-[13px]">
             当サイトは福岡にて
           </p>
@@ -688,7 +694,7 @@ function SiteIntro({
             おります。
           </p>
         </div>
-        <div className="-translate-x-1/2 [word-break:break-word] absolute content-stretch flex flex-col gap-[2px] items-center justify-center left-1/2 not-italic text-[#9b7b3a] text-justify top-[227px] whitespace-nowrap">
+        <div className="-translate-x-1/2 [word-break:break-word] absolute content-stretch flex flex-col gap-[2px] items-center justify-center left-1/2 not-italic text-[#2e2117] text-justify top-[227px] whitespace-nowrap">
           <p className="font-['Yuji_Syuku',sans-serif] leading-[normal] relative shrink-0 text-[12px]">
             広告・案件は
           </p>
@@ -953,10 +959,12 @@ function NorenGate({
 
 function FirstView({
   sectionRef,
+  conceptRef,
   passed,
   onPass,
 }: {
   sectionRef?: Ref<HTMLDivElement>;
+  conceptRef?: Ref<HTMLDivElement>;
   passed: boolean;
   onPass: () => void;
 }) {
@@ -976,7 +984,7 @@ function FirstView({
         style={{ pointerEvents: passed ? "none" : "auto" }}
       >
         <div ref={sectionRef} className="absolute bg-[#f2ede4] h-[1250.169px] left-[10px] top-0 w-[373px]" />
-        <ConceptSection />
+        <ConceptSection sectionRef={conceptRef} />
         <NoodleDecoration />
         {/* Title 骨霧 */}
         <div className="-translate-x-1/2 absolute h-[287px] left-[calc(50%-2px)] top-[17px] w-[120px]">
@@ -1002,7 +1010,7 @@ function FirstView({
   );
 }
 
-export default function MainPage({ onNavigate, passed, onPass, onReset, scrollRoot }: Props) {
+export default function MainPage({ onNavigate, passed, onPass, onReset, onExitEntrance, scrollRoot }: Props) {
   const firstViewRef = useRef<HTMLDivElement | null>(null);
   const siteIntroRef = useRef<HTMLDivElement | null>(null);
   const conceptRef = useRef<HTMLDivElement | null>(null);
@@ -1011,6 +1019,13 @@ export default function MainPage({ onNavigate, passed, onPass, onReset, scrollRo
 
   const scrollTo = (ref: { current: HTMLDivElement | null }) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  // コンセプト：表紙（ファーストビュー）の赤い文章へ。入店中なら表紙に戻してそこへ移動
+  const goConcept = () => {
+    onExitEntrance();
+    // スクロール制限と競合しないよう即時に移動
+    conceptRef.current?.scrollIntoView({ block: "center" });
   };
 
   // 入店：のれんを抜けたら本編（サイト紹介）へ送り込む
@@ -1043,11 +1058,23 @@ export default function MainPage({ onNavigate, passed, onPass, onReset, scrollRo
         <Footer
           onGoTop={onReset}
           onSiteIntro={() => scrollTo(siteIntroRef)}
-          onConcept={() => scrollTo(conceptRef)}
+          onConcept={goConcept}
           onProduct={() => scrollTo(productRef)}
           onAuthor={() => scrollTo(authorRef)}
         />
-        <PassionSection sectionRef={conceptRef} />
+        <PassionSection />
+        <p
+          className="-translate-x-1/2 absolute left-1/2 top-[3798px] text-center font-['Noto_Sans_JP',sans-serif] font-medium text-[#9b7b3a] text-[11px] whitespace-nowrap"
+          style={{ letterSpacing: "0.45em" }}
+        >
+          MESSAGE
+        </p>
+        <p
+          className="-translate-x-1/2 absolute left-1/2 top-[3404px] text-center font-['Noto_Sans_JP',sans-serif] font-medium text-[#9b7b3a] text-[11px] whitespace-nowrap"
+          style={{ letterSpacing: "0.45em" }}
+        >
+          AUTHOR
+        </p>
         <div
           ref={authorRef}
           className="-translate-x-1/2 absolute left-1/2 size-[296px] top-[3438px]"
@@ -1062,7 +1089,7 @@ export default function MainPage({ onNavigate, passed, onPass, onReset, scrollRo
           />
         </div>
         <div
-          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%-148px)] not-italic opacity-70 text-[9px] text-black top-[3740px] w-[162px]"
+          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[0] left-[calc(50%-148px)] not-italic text-[9px] text-[#2e2117] top-[3740px] w-[162px]"
           style={{ fontFeatureSettings: '"dlig"' }}
         >
           <p className="leading-[12px] mb-0">福岡出身・在住21年の学生。</p>
@@ -1075,6 +1102,7 @@ export default function MainPage({ onNavigate, passed, onPass, onReset, scrollRo
       {/* ファーストビュー（前面の表紙）。入店すると消える */}
       <FirstView
         sectionRef={firstViewRef}
+        conceptRef={conceptRef}
         passed={passed}
         onPass={onPass}
       />
