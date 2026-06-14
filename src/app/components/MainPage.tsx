@@ -599,7 +599,7 @@ function SiteIntro({
         aria-hidden
       />
       <motion.div
-        className="absolute border-5 border-black border-solid h-[422px] left-[calc(50%-192px)] overflow-clip top-[1251px] w-[365px]"
+        className="absolute border-5 border-black border-solid h-[422px] left-[calc(50%-194.5px)] overflow-clip top-[1251px] w-[389px]"
         data-name="サイト紹介"
         style={{ transformOrigin: "top center" }}
         initial={false}
@@ -614,7 +614,7 @@ function SiteIntro({
           delay: revealed ? 0.9 : 0,
         }}
       >
-        <div className="-translate-x-1/2 absolute bottom-[calc(0%-5px)] left-1/2 top-[calc(0.36%-4.96px)] w-[363px]">
+        <div className="-translate-x-1/2 absolute bottom-[calc(0%-5px)] left-1/2 top-[calc(0.36%-4.96px)] w-[387px]">
           <div className="absolute inset-[-0.18%_-0.21%]">
             <svg
               className="block size-full"
@@ -631,7 +631,7 @@ function SiteIntro({
             </svg>
           </div>
         </div>
-        <div className="-translate-x-1/2 absolute bottom-[calc(3.32%-4.67px)] left-1/2 top-[calc(1.9%-4.81px)] w-[345px]">
+        <div className="-translate-x-1/2 absolute bottom-[calc(3.32%-4.67px)] left-1/2 top-[calc(1.9%-4.81px)] w-[369px]">
           <svg
             className="absolute block inset-0 size-full"
             fill="none"
@@ -654,7 +654,7 @@ function SiteIntro({
           <span className="leading-[normal] tracking-[0.16px]">い</span>
           <span className="leading-[normal]">ませ</span>
         </p>
-        <div className="absolute h-0 left-[53px] top-[79px] w-[248px]">
+        <div className="absolute h-0 left-[71px] top-[79px] w-[248px]">
           <div className="absolute inset-[-0.75px_0]">
             <svg
               className="block size-full"
@@ -719,7 +719,7 @@ function SiteIntro({
           こつぎり
         </p>
         {/* Hanko stamp */}
-        <div className="absolute flex items-center justify-center left-[263.83px] size-[70.342px] top-[298.83px]">
+        <div className="absolute flex items-center justify-center left-[287.83px] size-[70.342px] top-[298.83px]">
           <div className="-rotate-11 flex-none">
             <div className="relative size-[60px]">
               <div className="absolute inset-[-2.29%_-0.7%_-1.84%_-2.26%]">
@@ -744,7 +744,7 @@ function SiteIntro({
             </div>
           </div>
         </div>
-        <div className="absolute flex h-[41.93px] items-center justify-center left-[269.88px] top-[310.67px] w-[55.376px]">
+        <div className="absolute flex h-[41.93px] items-center justify-center left-[293.88px] top-[310.67px] w-[55.376px]">
           <div className="-rotate-11 flex-none">
             <div className="[word-break:break-word] content-stretch flex flex-col font-['Yuji_Syuku',sans-serif] items-center not-italic relative text-[#c0321a] text-center w-[50px]">
               <p className="leading-[24px] relative shrink-0 text-[24px] w-full">

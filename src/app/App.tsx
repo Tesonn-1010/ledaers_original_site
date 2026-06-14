@@ -4,8 +4,8 @@ import SubPage from "./components/SubPage";
 
 type Page = "main" | "sub";
 
-// のれんが画面上で占める下端のおおよその位置（くぐる前はここより下へ行かせない）
-const NOREN_BOTTOM = 1300;
+// くぐる前に到達できる下端。のれん(〜1297px)が画面の中ほどに収まるよう少し余裕を持たせる
+const NOREN_BOTTOM = 1450;
 
 export default function App() {
   const [page, setPage] = useState<Page>("main");
@@ -18,10 +18,11 @@ export default function App() {
     scrollRef.current?.scrollTo({ top: 0 });
   };
 
-  // 最初に戻る：入店状態を解除して表紙（ファーストビュー）へ戻す
+  // 最初に戻る：入店状態を解除して、骨霧ロゴ（先頭）まで戻す
   const resetEntrance = () => {
-    scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     setPassed(false);
+    // スクロール制限の再適用と競合しないよう、先頭へは即時に移動する
+    scrollRef.current?.scrollTo({ top: 0 });
   };
 
   // 入店前（メイン画面・未くぐり）は、のれんより下へスクロールできないようにする
