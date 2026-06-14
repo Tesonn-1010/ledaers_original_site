@@ -1,4 +1,4 @@
-import { useRef, useState, type Ref } from "react";
+import { useRef, type Ref } from "react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/スマホデザインカンプMain最終版/svg-nkcp82ojx7";
 import img from "../../imports/スマホデザインカンプMain最終版/6a3050d00e701ea5527c626ec1519aa4e799bebd.png";
@@ -11,6 +11,8 @@ import img5 from "../../imports/スマホデザインカンプMain最終版/285e
 
 interface Props {
   onNavigate: (page: "sub") => void;
+  passed: boolean;
+  onPass: () => void;
 }
 
 interface FooterBackArrowProps {
@@ -550,16 +552,34 @@ function GuideSection({ onNavigate }: { onNavigate: (page: "sub") => void }) {
   );
 }
 
-function SiteIntro({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
+function SiteIntro({
+  sectionRef,
+  revealed,
+}: {
+  sectionRef?: Ref<HTMLDivElement>;
+  revealed?: boolean;
+}) {
   return (
     <div
       ref={sectionRef}
       className="absolute contents left-[calc(50%-192px)] top-[1251px]"
       data-name="サイト紹介"
     >
-      <div
+      <motion.div
         className="absolute border-5 border-black border-solid h-[422px] left-[calc(50%-192px)] overflow-clip top-[1251px] w-[365px]"
         data-name="サイト紹介"
+        style={{ transformOrigin: "top center" }}
+        initial={false}
+        animate={
+          revealed
+            ? { opacity: 1, clipPath: "inset(0 0 0% 0)" }
+            : { opacity: 0, clipPath: "inset(0 0 100% 0)" }
+        }
+        transition={{
+          duration: 1.3,
+          ease: [0.16, 1, 0.3, 1],
+          delay: revealed ? 0.9 : 0,
+        }}
       >
         <div className="-translate-x-1/2 absolute bottom-[calc(0%-5px)] left-1/2 top-[calc(0.36%-4.96px)] w-[363px]">
           <div className="absolute inset-[-0.18%_-0.21%]">
@@ -703,7 +723,7 @@ function SiteIntro({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -799,14 +819,22 @@ function NorenContent() {
       <p className="[word-break:break-word] absolute left-[calc(50%-109px)] top-[121px] font-['Yuji_Syuku',sans-serif] not-italic leading-[0] text-[0px] text-black tracking-[2.4px] whitespace-nowrap">
         <span className="leading-[0.88] text-[48px]">ら</span>
         <span className="leading-[0.88] text-[40px] tracking-[23.6px]">ー</span>
-        <span className="leading-[0.88] text-[48px] tracking-[1.44px]">めん</span>
+        <span className="leading-[0.88] text-[48px] tracking-[1.44px]">
+          めん
+        </span>
       </p>
     </div>
   );
 }
 
 // 拉麺のれんゲート：くぐる（タップ）まで下が見えない。くぐると左右に割れて持ち上がる。
-function NorenGate({ passed, onPass }: { passed: boolean; onPass: () => void }) {
+function NorenGate({
+  passed,
+  onPass,
+}: {
+  passed: boolean;
+  onPass: () => void;
+}) {
   // 左右それぞれの半分。clip(overflow-hidden)で中央のスリットから割る。
   const half = (side: "left" | "right") => {
     const isLeft = side === "left";
@@ -828,9 +856,7 @@ function NorenGate({ passed, onPass }: { passed: boolean; onPass: () => void }) 
             : { x: 0, y: 0, rotate: 0, opacity: 1 }
         }
         transition={
-          passed
-            ? { duration: 0.95, ease: [0.7, 0, 0.3, 1] }
-            : { duration: 0.5 }
+          passed ? { duration: 1.6, ease: [0.7, 0, 0.3, 1] } : { duration: 0.5 }
         }
       >
         {/* 風にゆれる（くぐる前のみ） */}
@@ -840,8 +866,16 @@ function NorenGate({ passed, onPass }: { passed: boolean; onPass: () => void }) 
             transformOrigin: "top center",
             marginLeft: isLeft ? 0 : -196,
           }}
-          animate={passed ? { rotate: 0, skewX: 0 } : { rotate: [-0.7, 0.7, -0.7], skewX: [-0.4, 0.4, -0.4] }}
-          transition={passed ? { duration: 0.3 } : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          animate={
+            passed
+              ? { rotate: 0, skewX: 0 }
+              : { rotate: [-0.7, 0.7, -0.7], skewX: [-0.4, 0.4, -0.4] }
+          }
+          transition={
+            passed
+              ? { duration: 0.3 }
+              : { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }
         >
           <NorenContent />
         </motion.div>
@@ -929,14 +963,12 @@ function FirstView({
   );
 }
 
-export default function MainPage({ onNavigate }: Props) {
+export default function MainPage({ onNavigate, passed, onPass }: Props) {
   const firstViewRef = useRef<HTMLDivElement | null>(null);
   const siteIntroRef = useRef<HTMLDivElement | null>(null);
   const conceptRef = useRef<HTMLDivElement | null>(null);
   const productRef = useRef<HTMLDivElement | null>(null);
   const authorRef = useRef<HTMLDivElement | null>(null);
-  // のれんをくぐったか（くぐるまで、のれんから下のコンテンツは隠す）
-  const [passed, setPassed] = useState(false);
 
   const scrollTo = (ref: { current: HTMLDivElement | null }) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -978,12 +1010,12 @@ export default function MainPage({ onNavigate }: Props) {
       </div>
       <KenbaikiSection onNavigate={onNavigate} sectionRef={productRef} />
       <GuideSection onNavigate={onNavigate} />
-      <SiteIntro sectionRef={siteIntroRef} />
+      <SiteIntro sectionRef={siteIntroRef} revealed={passed} />
       <FirstView
         sectionRef={firstViewRef}
         conceptRef={conceptRef}
         passed={passed}
-        onPass={() => setPassed(true)}
+        onPass={onPass}
       />
       {/* のれんから下を隠す目隠し。くぐると上へめくれて消える */}
       <motion.div
@@ -995,8 +1027,12 @@ export default function MainPage({ onNavigate }: Props) {
           pointerEvents: passed ? "none" : "auto",
         }}
         initial={false}
-        animate={passed ? { y: "-100%", opacity: 0 } : { y: 0, opacity: 1 }}
-        transition={{ duration: 0.95, ease: [0.7, 0, 0.3, 1], delay: passed ? 0.15 : 0 }}
+        animate={passed ? { opacity: 0 } : { opacity: 1 }}
+        transition={{
+          duration: 1.2,
+          ease: "easeInOut",
+          delay: passed ? 0.6 : 0,
+        }}
         aria-hidden
       />
     </div>
