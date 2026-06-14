@@ -432,11 +432,10 @@ function KenbaikiSection({
 }) {
   return (
     <div
-      ref={sectionRef}
       className="absolute contents left-0 top-[2517px]"
       data-name="商品紹介"
     >
-      <div className="absolute bg-black h-[843.001px] left-0 top-[2517px] w-[390px]" />
+      <div ref={sectionRef} className="absolute bg-black h-[843.001px] left-0 top-[2517px] w-[390px]" />
       <div
         className="absolute h-[843.001px] left-px top-[2518px] w-[389px]"
         data-name="券売機"
@@ -561,10 +560,15 @@ function SiteIntro({
 }) {
   return (
     <div
-      ref={sectionRef}
       className="absolute contents left-[calc(50%-192px)] top-[1251px]"
       data-name="サイト紹介"
     >
+      {/* スクロール用アンカー（footerの「サイト紹介」が確実に飛べるように） */}
+      <div
+        ref={sectionRef}
+        className="absolute h-0 w-0 left-[calc(50%-192px)] top-[1251px]"
+        aria-hidden
+      />
       <motion.div
         className="absolute border-5 border-black border-solid h-[422px] left-[calc(50%-192px)] overflow-clip top-[1251px] w-[365px]"
         data-name="サイト紹介"
@@ -731,11 +735,10 @@ function SiteIntro({
 function ConceptSection({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
   return (
     <div
-      ref={sectionRef}
       className="-translate-x-1/2 absolute contents left-[calc(50%-1px)] top-[729.77px]"
       data-name="コンセプト"
     >
-      <div className="-translate-x-1/2 absolute h-[243.228px] left-[calc(50%-1px)] top-[729.77px] w-[390px]">
+      <div ref={sectionRef} className="-translate-x-1/2 absolute h-[243.228px] left-[calc(50%-1px)] top-[729.77px] w-[390px]">
         <div className="absolute bg-[#f2ede4] h-[225px] left-px top-0 w-[389px]" />
         <div className="-translate-x-1/2 [word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[154px] leading-[24px] left-[calc(50%+1px)] not-italic text-[#c0321a] text-[24px] top-[40px] w-[212px]">
           <p
@@ -932,11 +935,10 @@ function FirstView({
 }) {
   return (
     <div
-      ref={sectionRef}
       className="absolute contents left-[-1px] top-0"
       data-name="ファーストビュー"
     >
-      <div className="absolute bg-[#f2ede4] h-[1250.169px] left-[10px] top-0 w-[373px]" />
+      <div ref={sectionRef} className="absolute bg-[#f2ede4] h-[1250.169px] left-[10px] top-0 w-[373px]" />
       <ConceptSection sectionRef={conceptRef} />
       <NoodleDecoration />
       {/* Title 骨霧 */}
