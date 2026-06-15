@@ -1,5 +1,6 @@
 import { useRef, useEffect, type Ref } from "react";
 import { motion } from "motion/react";
+import type { MainTarget } from "../App";
 import svgPaths from "../../imports/スマホデザインカンプMain最終版/svg-nkcp82ojx7";
 import img from "../../imports/スマホデザインカンプMain最終版/6a3050d00e701ea5527c626ec1519aa4e799bebd.png";
 import img1 from "../../imports/スマホデザインカンプMain最終版/ca73fb16c2782ab6be9974c944edcf320c673545.png";
@@ -15,6 +16,8 @@ interface Props {
   onPass: () => void;
   onReset: () => void;
   onExitEntrance: () => void;
+  mainTarget: MainTarget | null;
+  onTargetConsumed: () => void;
   scrollRoot: React.RefObject<HTMLDivElement | null>;
 }
 
@@ -1104,6 +1107,8 @@ export default function MainPage({
   onPass,
   onReset,
   onExitEntrance,
+  mainTarget,
+  onTargetConsumed,
   scrollRoot,
 }: Props) {
   const firstViewRef = useRef<HTMLDivElement | null>(null);
@@ -1123,12 +1128,41 @@ export default function MainPage({
     conceptRef.current?.scrollIntoView({ block: "center" });
   };
 
-  // 入店：のれんを抜けたら本編（サイト紹介）へ送り込む
+  // 入店：のれんを抜けたら本編（サイト紹介）へ送り込む。
+  // ・サブページから飛び先指定(mainTarget)で来た場合は発火しない。
+  // ・依存は[passed]のみ。mainTargetを依存に入れると、飛び先を消費してnullに
+  //   戻った瞬間に再発火し、商品特集/作者紹介から一旦サイト紹介へ戻されてしまう。
   useEffect(() => {
-    if (!passed) return;
+    if (!passed || mainTarget) return;
     const t = setTimeout(() => scrollTo(siteIntroRef), 1500);
     return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [passed]);
+
+  // サブページからの飛び先指定を消費し、対応セクションへ移動する
+  useEffect(() => {
+    if (!mainTarget) return;
+    const refs: Record<MainTarget, { current: HTMLDivElement | null }> = {
+      top: firstViewRef,
+      concept: conceptRef,
+      siteIntro: siteIntroRef,
+      product: productRef,
+      author: authorRef,
+    };
+    const ref = refs[mainTarget];
+    const t = setTimeout(() => {
+      if (mainTarget === "top") {
+        scrollRoot.current?.scrollTo({ top: 0 });
+      } else {
+        // スクロール制限と競合しないよう即時に移動
+        ref.current?.scrollIntoView({
+          block: mainTarget === "concept" ? "center" : "start",
+        });
+      }
+      onTargetConsumed();
+    }, 60);
+    return () => clearTimeout(t);
+  }, [mainTarget]);
 
   return (
     <motion.div

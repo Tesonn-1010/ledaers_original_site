@@ -2,8 +2,10 @@ import svgPaths from "../../imports/スマホデザインカンプSub最終版/s
 import imgRectangle4 from "../../imports/スマホデザインカンプSub最終版/93e0105758c8c1fb202207630a3dea113cdcec0e.png";
 import img from "../../imports/スマホデザインカンプSub最終版/7b565c0ae529e8a6942588620720afd226207ecf.png";
 
+import type { MainTarget } from "../App";
+
 interface Props {
-  onNavigate: (page: "main") => void;
+  onNavMain: (target: MainTarget) => void;
   scrollRoot: React.RefObject<HTMLDivElement | null>;
 }
 
@@ -27,7 +29,7 @@ function FooterBackArrow({ onTop }: { onTop: () => void }) {
   );
 }
 
-function FooterNavContents({ onNavigate }: { onNavigate: (page: "main") => void }) {
+function FooterNavContents({ onNavMain }: { onNavMain: (target: MainTarget) => void }) {
   const navClass =
     "[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] not-italic text-[8px] text-black top-[17px] w-[8px] bg-transparent border-none cursor-pointer p-0 text-left";
   return (
@@ -39,13 +41,13 @@ function FooterNavContents({ onNavigate }: { onNavigate: (page: "main") => void 
           </svg>
         </div>
       </div>
-      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-[92px]`} style={{ fontFeatureSettings: '"dlig"' }}>トップ</button>
-      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[0] left-[calc(50%-4px)]`} style={{ fontFeatureSettings: '"dlig"' }}>
+      <button type="button" onClick={() => onNavMain("top")} className={`${navClass} leading-[8px] left-[92px]`} style={{ fontFeatureSettings: '"dlig"' }}>トップ</button>
+      <button type="button" onClick={() => onNavMain("siteIntro")} className={`${navClass} leading-[0] left-[calc(50%-4px)]`} style={{ fontFeatureSettings: '"dlig"' }}>
         <span className="block leading-[8px]">サイト紹介</span>
       </button>
-      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-[70px]`} style={{ fontFeatureSettings: '"dlig"' }}>コンセプト</button>
-      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-[24px]`} style={{ fontFeatureSettings: '"dlig"' }}>商品特集</button>
-      <button type="button" onClick={() => onNavigate("main")} className={`${navClass} leading-[8px] left-0`} style={{ fontFeatureSettings: '"dlig"' }}>作者紹介</button>
+      <button type="button" onClick={() => onNavMain("concept")} className={`${navClass} leading-[8px] left-[70px]`} style={{ fontFeatureSettings: '"dlig"' }}>コンセプト</button>
+      <button type="button" onClick={() => onNavMain("product")} className={`${navClass} leading-[8px] left-[24px]`} style={{ fontFeatureSettings: '"dlig"' }}>商品特集</button>
+      <button type="button" onClick={() => onNavMain("author")} className={`${navClass} leading-[8px] left-0`} style={{ fontFeatureSettings: '"dlig"' }}>作者紹介</button>
     </div>
   );
 }
@@ -61,7 +63,7 @@ function FooterMessage() {
   );
 }
 
-function Footer({ onNavigate, onTop }: { onNavigate: (page: "main") => void; onTop: () => void }) {
+function Footer({ onNavMain, onTop }: { onNavMain: (target: MainTarget) => void; onTop: () => void }) {
   return (
     <div className="-translate-x-1/2 absolute contents left-[calc(50%+1.92px)] top-[2577.01px]" data-name="フッター">
       <FooterBackArrow onTop={onTop} />
@@ -80,7 +82,7 @@ function Footer({ onNavigate, onTop }: { onNavigate: (page: "main") => void; onT
       {/* フッター main block */}
       <div className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[25px] h-[444.975px] items-start left-[calc(50%+1.94px)] top-[2596.03px]">
         <p className="[word-break:break-word] font-['Yuji_Syuku',sans-serif] h-[196px] leading-[100px] min-w-full not-italic relative shrink-0 text-[100px] text-black w-[min-content]" style={{ fontFeatureSettings: '"dlig"' }}>骨霧</p>
-        <FooterNavContents onNavigate={onNavigate} />
+        <FooterNavContents onNavMain={onNavMain} />
         <FooterMessage />
       </div>
     </div>
@@ -266,12 +268,12 @@ function FirstView() {
   );
 }
 
-export default function SubPage({ onNavigate, scrollRoot }: Props) {
+export default function SubPage({ onNavMain, scrollRoot }: Props) {
   const scrollTop = () =>
     scrollRoot.current?.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <div className="bg-[#f2ede4] relative" style={{ width: "390px", height: "3200px" }} data-name="スマホデザインカンプ(sub)_最終版">
-      <Footer onNavigate={onNavigate} onTop={scrollTop} />
+      <Footer onNavMain={onNavMain} onTop={scrollTop} />
       <TipsSection />
       <WaitTimeSection />
       <EatMethodSection />
