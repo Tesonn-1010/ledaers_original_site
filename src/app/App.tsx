@@ -7,7 +7,7 @@ type Page = "main" | "sub";
 export type MainTarget = "top" | "concept" | "siteIntro" | "product" | "author";
 
 // くぐる前に到達できる下端。のれん(〜1297px)が画面の中ほどに収まるよう少し余裕を持たせる
-const NOREN_BOTTOM = 1450;
+const NOREN_BOTTOM = 1180;
 
 export default function App() {
   const [page, setPage] = useState<Page>("main");

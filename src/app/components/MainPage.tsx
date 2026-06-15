@@ -855,12 +855,12 @@ function SiteIntro({
 function ConceptSection({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
   return (
     <div
-      className="-translate-x-1/2 absolute contents left-[calc(50%-1px)] top-[700px]"
+      className="-translate-x-1/2 absolute contents left-[calc(50%-1px)] top-[575px]"
       data-name="コンセプト"
     >
       <div
         ref={sectionRef}
-        className="-translate-x-1/2 absolute h-[243.228px] left-[calc(50%-1px)] top-[700px] w-[390px]"
+        className="-translate-x-1/2 absolute h-[243.228px] left-[calc(50%-1px)] top-[575px] w-[390px]"
       >
         <div className="absolute bg-[#f2ede4] h-[225px] left-px top-0 w-[389px]" />
         <div className="-translate-x-1/2 [word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[154px] leading-[24px] left-[calc(50%+1px)] not-italic text-[#c0321a] text-[24px] top-[40px] w-[212px]">
@@ -896,7 +896,7 @@ function ConceptSection({ sectionRef }: { sectionRef?: Ref<HTMLDivElement> }) {
 
 function NoodleDecoration() {
   return (
-    <div className="absolute h-[115.041px] left-[30px] top-[500px] w-[330px]">
+    <div className="absolute h-[115.041px] left-[30px] top-[455px] w-[330px]">
       <div className="absolute inset-[-0.43%_-0.13%_-0.43%_-0.12%]">
         <svg
           className="block size-full"
@@ -1011,7 +1011,7 @@ function NorenGate({
   };
 
   return (
-    <div className="-translate-x-1/2 absolute left-1/2 top-[1020px] z-40 h-[230px] w-[392px]">
+    <div className="-translate-x-1/2 absolute left-1/2 top-[870px] z-40 h-[230px] w-[392px]">
       {/* くぐる前：上から布が下りるリベール */}
       <motion.div
         className="absolute inset-0"
@@ -1078,20 +1078,20 @@ function FirstView({
         <ConceptSection sectionRef={conceptRef} />
         <NoodleDecoration />
         {/* Title 骨霧 */}
-        <div className="-translate-x-1/2 absolute h-[287px] left-[calc(50%-2px)] top-[17px] w-[120px]">
+        <div className="-translate-x-1/2 absolute h-[287px] left-[calc(50%-2px)] top-[-30px] w-[120px]">
           <div className="-translate-x-1/2 [word-break:break-word] absolute content-stretch flex flex-col font-['Yuji_Syuku',sans-serif] gap-[10px] h-[600px] items-center justify-center leading-[200px] left-[calc(50%+2px)] not-italic text-[200px] text-black top-[-31px] whitespace-nowrap">
             <p className="relative shrink-0">骨</p>
             <p className="relative shrink-0">霧</p>
           </div>
         </div>
         <p
-          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[310px] leading-[normal] left-[calc(50%+121px)] not-italic text-[#9b7b3a] text-[20px] top-[44px] w-[20px]"
+          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] h-[310px] leading-[normal] left-[calc(50%+121px)] not-italic text-[#9b7b3a] text-[20px] top-[4px] w-[20px]"
           style={{ fontFeatureSettings: '"vert"' }}
         >
           福岡豚骨ラーメンサイト
         </p>
         <p
-          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[60px] left-[calc(50%-149px)] not-italic text-[#9b7b3a] text-[24px] top-[186px] w-[24px]"
+          className="[word-break:break-word] absolute font-['Yuji_Syuku',sans-serif] leading-[60px] left-[calc(50%-149px)] not-italic text-[#9b7b3a] text-[24px] top-[146px] w-[24px]"
           style={{ fontFeatureSettings: '"dlig"' }}
         >
           こつぎり
@@ -1170,7 +1170,7 @@ export default function MainPage({
       style={{
         width: "390px",
         height: "4770px",
-        transformOrigin: "50% 1167px",
+        transformOrigin: "50% 985px",
       }}
       data-name="スマホデザインカンプ(main)_最終版"
       // 入店：のれんを抜けた瞬間、店内へ一歩踏み込むように画面が前へ寄る。
