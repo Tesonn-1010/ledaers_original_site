@@ -1,11 +1,11 @@
 import svgPaths from "./svg-nkcp82ojx7";
-import img from "./6a3050d00e701ea5527c626ec1519aa4e799bebd.png";
-import img1 from "./ca73fb16c2782ab6be9974c944edcf320c673545.png";
-import img2 from "./1da941f24982806be86b82a41e0ddae51299cafd.png";
-import img3 from "./7eb913e275c265f1c02fd586ac1aca3a1a900be0.png";
-import img4 from "./65831a1563b9572914e6dea4aa2d419676461b9a.png";
-import imgRectangle2 from "./f11616ff4bd49e75c2b1ecc15de518dbef9cf7a0.png";
-import img5 from "./285eb404c1f4676bf85f8848f3fa9c8985e4aabb.png";
+import img from "./6a3050d00e701ea5527c626ec1519aa4e799bebd.webp";
+import img1 from "./ca73fb16c2782ab6be9974c944edcf320c673545.webp";
+import img2 from "./1da941f24982806be86b82a41e0ddae51299cafd.webp";
+import img3 from "./7eb913e275c265f1c02fd586ac1aca3a1a900be0.webp";
+import img4 from "./65831a1563b9572914e6dea4aa2d419676461b9a.webp";
+import imgRectangle2 from "./f11616ff4bd49e75c2b1ecc15de518dbef9cf7a0.webp";
+import img5 from "./285eb404c1f4676bf85f8848f3fa9c8985e4aabb.webp";
 
 function Component2() {
   return (

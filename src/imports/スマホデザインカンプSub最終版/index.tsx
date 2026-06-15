@@ -1,6 +1,6 @@
 import svgPaths from "./svg-77puehqdlq";
-import imgRectangle4 from "./93e0105758c8c1fb202207630a3dea113cdcec0e.png";
-import img from "./7b565c0ae529e8a6942588620720afd226207ecf.png";
+import imgRectangle4 from "./93e0105758c8c1fb202207630a3dea113cdcec0e.webp";
+import img from "./7b565c0ae529e8a6942588620720afd226207ecf.webp";
 
 function Component1() {
   return (
