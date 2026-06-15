@@ -1,28 +1,1095 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>骨霧</title>
-    <meta
-      name="description"
-      content="Effortlessly convert Figma designs into responsive HTML, CSS, and JavaScript code, streamlining the web development process for designers and developers."
-    />
+    <meta name="description" content="福岡豚骨ラーメンサイト 骨霧" />
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@400&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;700&family=Yuji+Syuku&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      :root {
+        --paper: #f2ede4;
+        --ink: #1c1008;
+        --gold: #9b7b3a;
+        --red: #c0321a;
+        --gray: #dedbd4;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       html,
       body {
         height: 100%;
         margin: 0;
+        background: var(--paper);
+        color: var(--ink);
       }
-      #root {
+
+      body {
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        font-family: "Yuji Syuku", "Noto Serif JP", serif;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .scroll-root {
+        width: 390px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: var(--paper);
+        scrollbar-width: none;
+      }
+
+      .scroll-root::-webkit-scrollbar {
+        display: none;
+      }
+
+      .page {
+        position: relative;
+        width: 390px;
+        height: 5192px;
+        background: var(--paper);
+        overflow: hidden;
+        transform-origin: 50% 985px;
+      }
+
+      .main-layer,
+      .cover-layer {
+        position: absolute;
+        inset: 0 auto auto 0;
+        width: 390px;
+      }
+
+      .main-layer {
+        height: 5192px;
+        opacity: 0;
+        transform: scale(0.86);
+        transform-origin: 50% 1300px;
+        pointer-events: none;
+        transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .cover-layer {
+        height: 1250px;
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 1s ease-in-out;
+      }
+
+      body.entered .page {
+        animation: step-in 1.5s ease-in-out both;
+      }
+
+      body.entered .main-layer {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+        transition-delay: 0.45s;
+      }
+
+      body.entered .cover-layer {
+        opacity: 0;
+        pointer-events: none;
+        transition-delay: 0.5s;
+      }
+
+      @keyframes step-in {
+        0% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.07);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .abs {
+        position: absolute;
+      }
+
+      .vertical {
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+      }
+
+      .vertical-mixed {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+      }
+
+      .center-x {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .cover-bg {
+        left: 10px;
+        top: 0;
+        width: 373px;
+        height: 1250px;
+        background: var(--paper);
+      }
+
+      .site-tag {
+        left: 316px;
+        top: 4px;
+        width: 20px;
+        height: 310px;
+        color: var(--gold);
+        font-size: 20px;
+        line-height: 1;
+      }
+
+      .reading {
+        left: 46px;
+        top: 146px;
+        width: 24px;
+        color: var(--gold);
+        font-size: 24px;
+        line-height: 60px;
+      }
+
+      .title {
+        left: 135px;
+        top: -31px;
+        width: 120px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #000;
+        font-size: 200px;
+        line-height: 200px;
+        white-space: nowrap;
+      }
+
+      .noodle {
+        left: 30px;
+        top: 455px;
+        width: 330px;
+        height: 115px;
+        overflow: visible;
+      }
+
+      .concept {
+        left: 0;
+        top: 575px;
+        width: 390px;
+        height: 225px;
+        background: var(--paper);
+      }
+
+      .concept-copy {
+        left: 89px;
+        top: 40px;
+        width: 212px;
+        height: 154px;
+        color: var(--red);
+        font-size: 24px;
+        line-height: 24px;
+      }
+
+      .concept-copy p {
+        position: absolute;
+        width: 28px;
+      }
+
+      .ramen-large {
+        left: 82px;
+        top: 1040px;
+        color: #000;
+        font-size: 0;
+        letter-spacing: 20px;
+        white-space: nowrap;
+      }
+
+      .ramen-large span:first-child {
+        font-size: 105px;
+        line-height: 0.88;
+      }
+
+      .ramen-large span:last-child {
+        font-size: 100px;
+        line-height: 0.88;
+      }
+
+      .ramen-small {
+        left: 86px;
+        top: 1144px;
+        color: #000;
+        font-size: 0;
+        letter-spacing: 2.4px;
+        white-space: nowrap;
+      }
+
+      .cover-layer > .ramen-large,
+      .cover-layer > .ramen-small {
+        display: none;
+      }
+
+      .ramen-small span:nth-child(1),
+      .ramen-small span:nth-child(3) {
+        font-size: 48px;
+        line-height: 0.88;
+      }
+
+      .ramen-small span:nth-child(2) {
+        font-size: 40px;
+        line-height: 0.88;
+        letter-spacing: 23.6px;
+      }
+
+      .noren-gate {
+        left: 50%;
+        top: 870px;
+        z-index: 20;
+        width: 392px;
+        height: 230px;
+        transform: translateX(-50%);
+      }
+
+      .noren-mask {
+        position: absolute;
+        inset: 0;
+        animation: reveal-noren 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s both;
+      }
+
+      .noren-half {
+        position: absolute;
+        top: 0;
+        width: 196px;
+        height: 200px;
+        overflow: hidden;
+        transition: transform 1.6s cubic-bezier(0.6, 0, 0.2, 1), opacity 1.6s;
+      }
+
+      .noren-half.left {
+        left: 0;
+        transform-origin: left top;
+      }
+
+      .noren-half.right {
+        left: 196px;
+        transform-origin: right top;
+      }
+
+      .noren-inner {
+        position: absolute;
+        top: 0;
+        width: 392px;
+        height: 200px;
+        transform-origin: top center;
+        animation: sway 6s ease-in-out infinite;
+      }
+
+      .noren-title {
+        position: absolute;
+        left: 83px;
+        top: 17px;
+        color: #000;
+        font-size: 0;
+        letter-spacing: 20px;
+        white-space: nowrap;
+      }
+
+      .noren-title span:first-child {
+        font-size: 105px;
+        line-height: 0.88;
+      }
+
+      .noren-title span:last-child {
+        font-size: 100px;
+        line-height: 0.88;
+      }
+
+      .noren-kana {
+        position: absolute;
+        left: 87px;
+        top: 121px;
+        color: #000;
+        font-size: 0;
+        letter-spacing: 2.4px;
+        white-space: nowrap;
+      }
+
+      .noren-kana span:nth-child(1),
+      .noren-kana span:nth-child(3) {
+        font-size: 48px;
+        line-height: 0.88;
+      }
+
+      .noren-kana span:nth-child(2) {
+        font-size: 40px;
+        line-height: 0.88;
+        letter-spacing: 23.6px;
+      }
+
+      .right .noren-inner {
+        left: -196px;
+      }
+
+      body.entered .noren-half.left {
+        transform: translate(-150%, -28%) scale(1.7) rotate(-7deg);
+        opacity: 0;
+      }
+
+      body.entered .noren-half.right {
+        transform: translate(150%, -28%) scale(1.7) rotate(7deg);
+        opacity: 0;
+      }
+
+      body.entered .noren-inner {
+        animation: none;
+      }
+
+      .enter-button {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 30;
+        width: 100%;
+        height: 200px;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .enter-button span {
+        position: absolute;
+        left: 50%;
+        bottom: 2px;
+        transform: translateX(-50%);
+        color: var(--gold);
+        font-size: 13px;
+        letter-spacing: 4px;
+        white-space: nowrap;
+        animation: tap-pulse 2.2s ease-in-out infinite;
+      }
+
+      body.entered .enter-button {
+        display: none;
+      }
+
+      @keyframes reveal-noren {
+        from {
+          clip-path: inset(0 0 100% 0);
+          opacity: 0;
+        }
+        to {
+          clip-path: inset(0 0 0 0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes sway {
+        0%,
+        100% {
+          transform: rotate(-0.7deg) skewX(-0.4deg);
+        }
+        50% {
+          transform: rotate(0.7deg) skewX(0.4deg);
+        }
+      }
+
+      @keyframes tap-pulse {
+        0%,
+        100% {
+          opacity: 0.4;
+          translate: 0 0;
+        }
+        50% {
+          opacity: 1;
+          translate: 0 3px;
+        }
+      }
+
+      .site-intro {
+        left: 0;
+        top: 1251px;
+        width: 390px;
+        height: 844px;
+        border: 7px solid #000;
+        overflow: hidden;
+      }
+
+      .site-intro::before {
+        content: "";
+        position: absolute;
+        inset: 13px 16px 22px 16px;
+        border: 1px dashed #000;
+      }
+
+      .welcome {
+        left: 0;
+        top: 72px;
+        width: 100%;
+        color: var(--gold);
+        font-size: 40px;
+        letter-spacing: 3px;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .intro-line {
+        left: 65px;
+        top: 139px;
+        width: 260px;
+        border-top: 1.5px solid rgba(155, 123, 58, 0.39);
+      }
+
+      .intro-copy {
+        top: 171px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        color: #000;
+        font-size: 19px;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .intro-note {
+        top: 389px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        color: #000;
+        font-size: 18px;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .intro-sep {
+        left: 64px;
+        top: 509px;
+        width: 262px;
+        border-top: 1px solid var(--gold);
+      }
+
+      .intro-logo {
+        left: 0;
+        top: 543px;
+        width: 100%;
+        color: var(--gold);
+        font-size: 78px;
+        line-height: 78px;
+        text-align: center;
+      }
+
+      .intro-kana {
+        left: 0;
+        top: 630px;
+        width: 100%;
+        color: var(--gold);
+        font-size: 30px;
+        line-height: 30px;
+        letter-spacing: 5px;
+        text-align: center;
+      }
+
+      .stamp {
+        left: 300px;
+        top: 545px;
+        width: 60px;
+        height: 60px;
+        transform: rotate(-11deg);
+      }
+
+      .stamp-text {
+        left: 306px;
+        top: 557px;
+        width: 50px;
+        color: var(--red);
+        text-align: center;
+        transform: rotate(-11deg);
+      }
+
+      .stamp-text strong {
+        display: block;
+        font-size: 24px;
+        line-height: 24px;
+        font-weight: 400;
+      }
+
+      .stamp-text span {
+        display: block;
+        font-size: 12px;
+        line-height: 12px;
+      }
+
+      .guide {
+        left: 1px;
+        top: 2095px;
+        width: 389px;
+        height: 844px;
+        background: var(--gray);
+      }
+
+      .guide-col {
+        top: 150px;
+        width: 40px;
+        height: 430px;
+        color: #000;
+        font-size: 32px;
+        line-height: 1.05;
+        letter-spacing: 0.08em;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        white-space: nowrap;
+      }
+
+      .guide-col.one {
+        left: 204px;
+      }
+
+      .guide-col.two {
+        left: 154px;
+      }
+
+      .guide-arrow {
+        left: 187px;
+        top: 2786px;
+        width: 15px;
+        height: 120px;
+        transform: rotate(90deg);
+      }
+
+      .product {
+        left: 0;
+        top: 2939px;
+        width: 390px;
+        height: 843px;
+        background: #000;
+      }
+
+      .section-label {
+        left: 78px;
+        color: var(--gold);
+        font-family: "Noto Sans JP", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.45em;
+        white-space: nowrap;
+      }
+
+      .product .section-label {
+        top: 26px;
+      }
+
+      .ticket {
+        left: 75px;
+        top: 44px;
+        color: var(--gold);
+        font-size: 80px;
+        line-height: 80px;
+        white-space: nowrap;
+      }
+
+      .shop-grid {
+        left: 17px;
+        top: 135px;
+        width: 356px;
+        height: 600px;
+        padding: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+        gap: 60px 40px;
+      }
+
+      .shop-card {
+        position: relative;
+        width: 128px;
+        height: 128px;
+        border: 1.5px solid #fff;
+        background: var(--paper);
+        cursor: default;
+      }
+
+      .shop-card.link {
+        cursor: pointer;
+      }
+
+      .shop-card.link:hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .shop-card img {
+        display: block;
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+      }
+
+      .shop-name {
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink);
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+      }
+
+      .shop-name.serif {
+        font-family: "Inria Serif", serif;
+      }
+
+      .pager {
+        top: 739px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 4.5px;
+      }
+
+      .pager span {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid var(--gold);
+        color: var(--gold);
+        font-size: 24px;
+        line-height: 24px;
+      }
+
+      .pager span:first-child {
+        border-color: var(--red);
+        background: var(--red);
+        color: #fff;
+      }
+
+      .author-label {
+        top: 3826px;
+        width: 100%;
+        text-align: center;
+        color: var(--gold);
+        font-family: "Noto Sans JP", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.45em;
+      }
+
+      .author-photo {
+        left: 47px;
+        top: 3860px;
+        width: 296px;
+        height: 296px;
+      }
+
+      .author-photo img {
+        width: 100%;
         height: 100%;
+        display: block;
+      }
+
+      .author-copy {
+        left: 47px;
+        top: 4162px;
+        width: 162px;
+        color: #2e2117;
+        font-size: 9px;
+        line-height: 12px;
+      }
+
+      .message-label {
+        top: 4220px;
+        width: 100%;
+        text-align: center;
+        color: var(--gold);
+        font-family: "Noto Sans JP", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.45em;
+      }
+
+      .passion {
+        left: 32px;
+        top: 4246px;
+        width: 326px;
+        height: 304px;
+      }
+
+      .passion p {
+        position: absolute;
+        width: 12px;
+        color: var(--gold);
+        font-size: 12px;
+        line-height: 20px;
+      }
+
+      .footer-rule {
+        left: 12px;
+        top: 4701px;
+        width: 366px;
+        border-top: 1px solid #000;
+      }
+
+      .footer-kana {
+        left: 111px;
+        top: 4728px;
+        width: 16px;
+        height: 151px;
+        color: var(--gold);
+        font-size: 16px;
+        line-height: 40px;
+      }
+
+      .footer-logo {
+        left: 139px;
+        top: 4701px;
+        width: 112px;
+        height: 196px;
+        color: #000;
+        font-size: 100px;
+        line-height: 100px;
+      }
+
+      .footer-nav {
+        left: 139px;
+        top: 4922px;
+        width: 112px;
+        height: 60px;
+      }
+
+      .footer-nav::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        border-top: 1px solid #000;
+      }
+
+      .footer-nav button {
+        position: absolute;
+        top: 17px;
+        width: 8px;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: #000;
+        font-size: 8px;
+        line-height: 8px;
+        cursor: pointer;
+      }
+
+      .footer-message {
+        left: 139px;
+        top: 5007px;
+        width: 112px;
+        height: 127px;
+        color: #000;
+      }
+
+      .footer-message p {
+        position: absolute;
+        width: 14px;
+        font-size: 13px;
+        line-height: 13px;
+      }
+
+      .back-top {
+        left: 309px;
+        top: 5042px;
+        width: 40px;
+        height: 95px;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .back-top svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 8px;
+        height: 91px;
+      }
+
+      .back-top span {
+        position: absolute;
+        left: 2px;
+        top: 42px;
+        width: 10px;
+        color: #000;
+        font-size: 10px;
+        line-height: 10px;
       }
     </style>
   </head>
-
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <main class="scroll-root" id="scrollRoot">
+      <div class="page">
+        <section class="main-layer" aria-label="骨霧メインページ">
+          <section class="site-intro abs" id="siteIntro">
+            <p class="welcome abs">いらっしゃいませ</p>
+            <div class="intro-line abs"></div>
+            <div class="intro-copy abs">
+              <p>当サイトは福岡にて</p>
+              <p>実際に食べ歩いた</p>
+              <p>本物の豚骨ラーメンのみを</p>
+              <p>厳選してご紹介して</p>
+              <p>おります。</p>
+            </div>
+            <div class="intro-note abs">
+              <p>広告・案件は</p>
+              <p>一切ございません。</p>
+            </div>
+            <div class="intro-sep abs"></div>
+            <p class="intro-logo abs">骨霧</p>
+            <p class="intro-kana abs">こつぎり</p>
+            <svg class="stamp abs" viewBox="0 0 61.7726 62.478" aria-hidden="true">
+              <circle cx="31.355" cy="31.3736" fill="#fffcfc" r="30" />
+              <path
+                d="M60.9476 21.9564C61.0191 22.1794 61.0344 22.5153 61.0941 22.7826C61.3358 23.9067 61.3692 24.3309 61.5071 25.3556C61.8137 26.8701 61.8585 31.3787 61.5818 31.3735C61.534 31.3563 61.4913 30.9769 61.4383 30.9219C61.385 30.8672 61.0608 30.9117 61.0022 30.3861C60.9317 29.6249 60.8008 27.7932 60.7209 27.3915C60.6723 27.1169 60.5679 26.7869 60.4885 26.4385C60.2264 25.3235 60.1165 24.7282 59.6753 23.7844C59.3202 22.0427 59.1414 21.245 59.0117 20.9411C58.9063 20.6932 58.7769 20.575 58.663 20.3204C58.5346 20.0361 58.4154 19.5623 58.1553 19.054C57.7252 18.2238 57.4462 18.1772 57.1506 17.7072C56.8417 17.2214 56.4848 16.3921 56.0045 15.8253C55.9313 15.7628 55.8577 15.7008 55.7837 15.6394C55.7709 15.7258 55.7581 15.8119 55.7452 15.8975C55.5143 15.611 55.5258 15.4156 55.3306 15.1401C55.0997 14.8165 54.8796 14.7246 54.7177 14.5142C54.5851 14.342 54.4807 14.0517 54.2971 13.8353C54.0291 13.5209 53.9724 13.6801 53.8089 13.5283C53.7516 13.4591 52.5993 12.3098 52.5275 12.2541C52.0387 11.7618 52.1461 11.5765 51.759 11.1751C50.6796 10.0647 49.3287 9.19603 48.1278 8.4492C47.5916 8.11351 47.0483 7.74517 46.5306 7.38778C45.734 6.60867 45.1659 6.59325 44.5981 6.25525C44.2293 6.03748 44.0217 5.78317 43.4602 5.53091C42.4569 5.0773 41.2093 5.04578 41.1539 4.27092C39.8979 3.96074 38.8752 3.42496 38.2705 3.93849C37.9481 3.89759 37.2042 3.34334 36.8462 3.22524C36.5202 3.08064 33.8445 2.55265 33.3944 2.54515C32.573 2.48503 32.0729 2.47552 31.7923 2.51428C31.6389 2.53485 31.4999 2.6199 31.355 2.69907C31.0502 2.86513 30.732 3.00201 30.1469 2.49235C29.1725 2.60216 28.8314 2.60886 27.9138 2.61953C27.4206 2.54662 27.0998 2.67753 26.7504 2.74413C26.1774 2.85361 25.8057 2.67888 25.9395 3.03496C25.5774 3.16782 25.2153 3.30848 24.8598 3.45551C24.2404 3.46267 24.0627 3.59011 23.8868 3.71932C22.4791 4.10332 21.7442 4.23393 21.0103 4.39506C20.8806 3.77079 19.4639 4.95001 19.7471 5.2039C18.777 5.46351 18.2256 5.88502 17.3857 6.22471C16.5449 6.57314 16.5918 6.48685 16.206 6.38527C15.1792 8.03667 14.5562 6.78776 13.3639 8.44821C12.569 8.43945 11.5471 9.64658 10.9378 10.4639C9.8207 12.0711 9.53156 12.2635 9.24473 12.4621C8.47062 13.6001 8.04714 14.3737 7.74002 14.6773C6.52529 17.1003 6.07981 17.1108 5.86448 17.4381C5.06453 19.2474 5.40131 19.229 4.72101 20.6845C3.71966 23.7945 3.48686 25.264 3.32609 25.6752C2.73617 28.2145 2.56263 28.3597 2.53175 28.5562C2.5315 29.9841 2.30297 30.6989 2.29839 31.3441C2.30092 32.2931 2.71621 33.077 2.94598 33.8085C3.12512 36.8263 3.71005 39.5424 4.54584 41.8707C4.88381 42.9574 5.75235 45.7529 6.167 44.6657C6.44933 44.9557 7.64685 47.5813 8.00063 48.0183C8.70326 50.0592 10.3067 50.8301 11.5278 51.8385C12.6768 52.6106 12.7938 52.9493 13.075 53.1999C13.7382 53.8046 15.116 54.7504 15.8238 55.2349C16.7206 56.2835 17.6066 56.746 17.6911 56.2243C18.5356 57.0118 19.5951 57.2294 20.5512 57.6068C22.5534 58.4746 26.4323 59.5284 28.3572 59.4542C29.5596 59.4302 29.5312 59.228 31.2778 59.4486C32.6995 59.7361 34.8864 59.8261 35.4983 59.3381C36.7449 59.2869 37.6828 58.9929 38.686 59.1707C40.6546 58.622 41.8282 57.7821 42.6716 57.4274C44.1261 56.9027 47.6799 55.0432 48.9107 54.1837C51.3077 52.1373 52.2627 51.3883 52.924 50.6763C54.1483 49.392 55.6119 47.1782 56.624 45.7101C58.5942 47.7443 52.8617 54.7608 48.5838 57.1987C43.8611 59.758 43.7474 59.6278 43.5637 59.7009C41.9877 60.5007 40.3338 61.1689 38.6244 61.6894C36.8956 61.9801 35.1431 62.2308 33.3745 62.3666C32.6995 62.4182 32.0339 62.4535 31.355 62.4692C30.0767 62.4986 28.8061 62.4566 27.5477 62.3176C17.5761 61.2862 8.3707 55.0582 3.73486 46.281C2.82157 44.6039 1.76147 42.3952 1.30402 40.5682C0.778519 37.5521 0.501854 37.0262 0.332353 36.0323C0.172381 35.2048 -0.026806 32.964 0.00298548 32.2216C0.0963469 30.6967 -0.0128393 29.5775 0.0520688 28.8208C0.779672 24.0769 1.17337 21.7322 2.09376 19.6226C3.53801 16.1694 4.77377 14.4914 5.52678 13.4476C7.93817 9.99998 11.1859 6.81397 14.7803 4.63598C17.0072 3.19244 21.096 1.44544 23.5164 1.02965C26.6841 0.332332 29.6868 -0.0956873 31.355 0.0189257C35.4629 0.215195 37.1778 0.553814 39.3943 1.17501C43.7001 2.36505 48.4664 4.73002 51.856 7.99115C55.4748 11.6306 56.9938 14.0638 58.0004 15.7836C59.971 19.3892 60.4996 21.1537 60.6407 21.4678C60.7337 21.6577 60.8694 21.7158 60.9476 21.9564Z"
+                fill="#c0321a"
+              />
+            </svg>
+            <p class="stamp-text abs"><strong>骨霧</strong><span>こつぎり</span></p>
+          </section>
+
+          <section class="guide abs">
+            <p class="guide-col one abs">あなたの一杯を、</p>
+            <p class="guide-col two abs">選んでください</p>
+          </section>
+          <svg class="guide-arrow abs" viewBox="0 0 120 15" aria-hidden="true">
+            <path d="M6 7.5H105" stroke="#1c1008" stroke-width="2" />
+            <path d="M105 4.5L117 7.5L105 10.5V4.5Z" fill="#1c1008" />
+          </svg>
+
+          <section class="product abs" id="product">
+            <p class="section-label abs">RAMEN MENU</p>
+            <p class="ticket abs">券売機</p>
+            <div class="shop-grid abs">
+              <article class="shop-card link" id="issouCard">
+                <img src="assets/main-issou.webp" alt="一双" />
+                <p class="shop-name">一双</p>
+              </article>
+              <article class="shop-card">
+                <img src="assets/main-shinshin.webp" alt="Shin Shin" />
+                <p class="shop-name serif">Shin Shin</p>
+              </article>
+              <article class="shop-card">
+                <img src="assets/main-ippudo.webp" alt="一風堂" />
+                <p class="shop-name">一風堂</p>
+              </article>
+              <article class="shop-card">
+                <img src="assets/main-ikkousha.webp" alt="一幸舎" />
+                <p class="shop-name">一幸舎</p>
+              </article>
+              <article class="shop-card">
+                <img src="assets/main-jinanbo.webp" alt="二男坊" />
+                <p class="shop-name">二男坊</p>
+              </article>
+              <article class="shop-card">
+                <img src="assets/main-unari.webp" alt="海鳴" />
+                <p class="shop-name">海鳴</p>
+              </article>
+            </div>
+            <div class="pager abs"><span>１</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+          </section>
+
+          <p class="author-label abs">AUTHOR</p>
+          <figure class="author-photo abs" id="author">
+            <img src="assets/main-author.webp" alt="作者写真" />
+          </figure>
+          <div class="author-copy abs">
+            <p>福岡出身・在住21年の学生。</p>
+            <p>地元の豚骨ラーメンを食べ続けてきた。</p>
+          </div>
+
+          <p class="message-label abs">MESSAGE</p>
+          <section class="passion abs">
+            <p class="vertical" style="left:0;top:4px">正直に書いた。</p>
+            <p class="vertical" style="left:57px;top:4px">博多駅周辺の店だけを、</p>
+            <p class="vertical" style="left:114px;top:4px">全部自分で食べた。</p>
+            <p class="vertical" style="left:171px;top:4px">うまくなる食べ物だと気づいた。</p>
+            <p class="vertical" style="left:228px;top:4px">知れば知るほど、</p>
+          </section>
+
+          <footer>
+            <div class="footer-rule abs"></div>
+            <p class="footer-kana abs vertical">こつぎり</p>
+            <p class="footer-logo abs vertical">骨霧</p>
+            <nav class="footer-nav abs" aria-label="フッターナビゲーション">
+              <button type="button" data-scroll="author" style="left:0">作者紹介</button>
+              <button type="button" data-scroll="product" style="left:31px">商品特集</button>
+              <button type="button" data-scroll="siteIntro" style="left:62px">サイト紹介</button>
+              <button type="button" data-scroll="concept" style="left:93px">コンセプト</button>
+            </nav>
+            <div class="footer-message abs">
+              <p class="vertical" style="left:86px;top:0">福岡に</p>
+              <p class="vertical" style="left:60px;top:17px">来たら</p>
+              <p class="vertical" style="left:31px;top:26px">食べて欲しい</p>
+              <p class="vertical" style="left:0;top:65px;font-size:12px;line-height:12px">一杯がある</p>
+            </div>
+            <button class="back-top abs" type="button" id="backTop" aria-label="最初に戻る">
+              <svg viewBox="0 0 7.36396 91.3975" aria-hidden="true">
+                <path
+                  d="M4.03553 0.146447C3.84027 -0.0488155 3.52369 -0.0488155 3.32843 0.146447L0.146447 3.32843C-0.0488155 3.52369 -0.0488155 3.84027 0.146447 4.03553C0.341709 4.2308 0.658291 4.2308 0.853554 4.03553L3.68198 1.20711L6.51041 4.03553C6.70567 4.2308 7.02225 4.2308 7.21751 4.03553C7.41278 3.84027 7.41278 3.52369 7.21751 3.32843L4.03553 0.146447ZM3.68198 91.3975H4.18198V0.5H3.68198H3.18198V91.3975H3.68198Z"
+                  fill="#000"
+                />
+              </svg>
+              <span class="vertical">最初に戻る</span>
+            </button>
+          </footer>
+        </section>
+
+        <section class="cover-layer" id="top">
+          <div class="cover-bg abs"></div>
+          <p class="title abs vertical">骨霧</p>
+          <p class="site-tag abs vertical">福岡豚骨ラーメンサイト</p>
+          <p class="reading abs vertical">こつぎり</p>
+          <svg class="noodle abs" viewBox="0 0 390.443 116.041" aria-hidden="true">
+            <path d="M0.453082 80.9166C0.453082 80.9166 10.9531 58.3527 27.4531 58.3527C43.9531 58.3527 65.2206 109.322 94.9531 115.152C124.686 120.981 149.58 59.5038 188.953 58.3527C228.326 57.2016 256.413 120.488 288.453 115.152C320.493 109.815 339.953 53.6844 362.453 58.3527C384.953 63.0211 389.953 87.1412 389.953 87.1412" stroke="#9b7b3a" fill="none" />
+            <path d="M0.453082 65.3553C0.453082 65.3553 10.9531 42.7914 27.4531 42.7914C43.9531 42.7914 65.2206 93.761 94.9531 99.5902C124.686 105.419 149.58 43.9425 188.953 42.7914C228.326 41.6403 256.413 104.927 288.453 99.5902C320.493 94.2533 339.953 38.123 362.453 42.7914C384.953 47.4598 389.953 71.5798 389.953 71.5798" stroke="#9b7b3a" fill="none" />
+            <path d="M0.453082 51.3501C0.453082 51.3501 10.9531 28.7862 27.4531 28.7862C43.9531 28.7862 65.2206 79.7557 94.9531 85.585C124.686 91.4142 149.58 29.9373 188.953 28.7862C228.326 27.6351 256.413 90.9219 288.453 85.585C320.493 80.2481 339.953 24.1178 362.453 28.7862C384.953 33.4545 389.953 57.5746 389.953 57.5746" stroke="#9b7b3a" fill="none" />
+            <path d="M0.453082 37.3449C0.453082 37.3449 10.9531 14.781 27.4531 14.781C43.9531 14.781 65.2206 65.7506 94.9531 71.5798C124.686 77.409 149.58 15.9321 188.953 14.781C228.326 13.6299 256.413 76.9167 288.453 71.5798C320.493 66.2429 339.953 10.1126 362.453 14.781C384.953 19.4494 389.953 43.5694 389.953 43.5694" stroke="#9b7b3a" fill="none" />
+            <path d="M0.453082 23.3398C0.453082 23.3398 10.9531 0.775882 27.4531 0.775879C43.9531 0.775875 65.2206 51.7454 94.9531 57.5747C124.686 63.4039 149.58 1.92697 188.953 0.775879C228.326 -0.375217 256.413 62.9116 288.453 57.5747C320.493 52.2378 339.953 -3.89249 362.453 0.775879C384.953 5.44425 389.953 29.5643 389.953 29.5643" stroke="#9b7b3a" fill="none" />
+          </svg>
+          <section class="concept abs" id="concept">
+            <div class="concept-copy abs">
+              <p style="left:13px;top:67px">分かった</p>
+              <p style="left:67px;top:24px">本場と</p>
+              <p style="left:120px;top:22px">瞬間に</p>
+              <p style="left:174px;top:-27px">飲んだ</p>
+            </div>
+          </section>
+          <p class="ramen-large abs"><span>拉</span><span>麺</span></p>
+          <p class="ramen-small abs"><span>ら</span><span>ー</span><span>めん</span></p>
+          <div class="noren-gate abs">
+            <div class="noren-mask">
+              <div class="noren-half left">
+                <div class="noren-inner">
+                  <svg width="392" height="176" viewBox="0 0 392 176.02" aria-hidden="true">
+                    <path d="M392 174.116H351.949H315.402L311.397 3.16761L307.893 174.116H197.252L194.248 5.0561L189.742 175.02H77.0983L73.5939 0.0201254L70.0894 174.116H0" stroke="#000" stroke-width="2" fill="none" />
+                  </svg>
+                  <p class="noren-title"><span>拉</span><span>麺</span></p>
+                  <p class="noren-kana"><span>ら</span><span>ー</span><span>めん</span></p>
+                </div>
+              </div>
+              <div class="noren-half right">
+                <div class="noren-inner">
+                  <svg width="392" height="176" viewBox="0 0 392 176.02" aria-hidden="true">
+                    <path d="M392 174.116H351.949H315.402L311.397 3.16761L307.893 174.116H197.252L194.248 5.0561L189.742 175.02H77.0983L73.5939 0.0201254L70.0894 174.116H0" stroke="#000" stroke-width="2" fill="none" />
+                  </svg>
+                  <p class="noren-title"><span>拉</span><span>麺</span></p>
+                  <p class="noren-kana"><span>ら</span><span>ー</span><span>めん</span></p>
+                </div>
+              </div>
+            </div>
+            <button class="enter-button" type="button" id="enterButton">
+              <span>ここをタップして入店 ▼</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script>
+      (() => {
+        const root = document.getElementById("scrollRoot");
+        const enterButton = document.getElementById("enterButton");
+        const backTop = document.getElementById("backTop");
+        const noRenBottom = 1180;
+
+        const enter = () => {
+          document.body.classList.add("entered");
+          setTimeout(() => {
+            document.getElementById("siteIntro").scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 1500);
+        };
+
+        const reset = () => {
+          document.body.classList.remove("entered");
+          root.scrollTo({ top: 0, behavior: "auto" });
+        };
+
+        const clampBeforeEntry = () => {
+          if (document.body.classList.contains("entered")) return;
+          const max = Math.max(0, noRenBottom - root.clientHeight);
+          if (root.scrollTop > max) root.scrollTop = max;
+        };
+
+        enterButton.addEventListener("click", enter);
+        backTop.addEventListener("click", reset);
+        root.addEventListener("scroll", clampBeforeEntry, { passive: true });
+
+        document.querySelectorAll("[data-scroll]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const target = button.getAttribute("data-scroll");
+            if (target === "concept") {
+              document.body.classList.remove("entered");
+              document.getElementById("concept").scrollIntoView({ behavior: "smooth", block: "center" });
+              return;
+            }
+            document.body.classList.add("entered");
+            document.getElementById(target).scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
+
+        document.getElementById("issouCard").addEventListener("click", () => {
+          window.location.href = "detail.html";
+        });
+
+        const applyHashTarget = () => {
+          const target = window.location.hash.replace("#", "");
+          if (!target) return;
+          const element = document.getElementById(target);
+          if (!element) return;
+          if (target !== "top" && target !== "concept") {
+            document.body.classList.add("entered");
+          } else {
+            document.body.classList.remove("entered");
+          }
+          setTimeout(() => {
+            element.scrollIntoView({
+              behavior: "auto",
+              block: target === "concept" ? "center" : "start",
+            });
+          }, 80);
+        };
+
+        window.addEventListener("hashchange", applyHashTarget);
+        applyHashTarget();
+        clampBeforeEntry();
+      })();
+    </script>
   </body>
 </html>
