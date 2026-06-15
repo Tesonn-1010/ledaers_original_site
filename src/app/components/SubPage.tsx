@@ -1,6 +1,6 @@
 import svgPaths from "../../imports/スマホデザインカンプSub最終版/svg-77puehqdlq";
-import imgRectangle4 from "../../imports/スマホデザインカンプSub最終版/93e0105758c8c1fb202207630a3dea113cdcec0e.png";
-import img from "../../imports/スマホデザインカンプSub最終版/7b565c0ae529e8a6942588620720afd226207ecf.png";
+import imgRectangle4 from "../../imports/スマホデザインカンプSub最終版/93e0105758c8c1fb202207630a3dea113cdcec0e.webp";
+import img from "../../imports/スマホデザインカンプSub最終版/7b565c0ae529e8a6942588620720afd226207ecf.webp";
 
 import type { MainTarget } from "../App";
 
