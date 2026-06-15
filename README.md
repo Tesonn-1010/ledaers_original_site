@@ -1,11 +1,80 @@
+# 骨霧（こつぎり）— 福岡豚骨ラーメン情報サイト
 
-  # デザインのHTML出力
+福岡で実際に食べ歩いた豚骨ラーメンだけを紹介する、スマホ向けのラーメン情報サイトです。
+「暖簾（のれん）をくぐって入店する」体験を軸に、和の世界観で構成しています。
 
-  This is a code bundle for デザインのHTML出力. The original project is available at https://www.figma.com/design/3ue5S4bytqhaJKISeowWHw/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AEHTML%E5%87%BA%E5%8A%9B.
+🌐 公開URL: https://kotsugiri-tonkotsu.love
 
-  ## Running the code
+## コンセプト
 
-  Run `npm i` to install the dependencies.
+- **テーマ**: 福岡の豚骨ラーメン情報サイト
+- **差別化**: 広告・案件なし。自費訪問・実食のみ。
+- **世界観**: 和 × ラーメン文化／職人的・力強い／食への熱量
+- **読後感**: 「早く食べに行きたい」と思わせる
 
-  Run `npm run dev` to start the development server.
-  
+## 主な特徴（体験・演出）
+
+- **暖簾をくぐる入店演出**: トップで暖簾をタップすると、左右に割れて持ち上がり、
+  店内（本編）へ踏み込むように画面が動く
+- **ファーストビュー → 本編のレイヤー分離**: 表紙（骨霧ロゴ・コンセプト）が消え、
+  本編が奥から手前にせり出す
+- **文字送り**: 「あなたの一杯を、選んでください」をスクロールで一文字ずつ表示
+- **2ページ構成**: メイン（店舗一覧・コンセプト等）／サブ（店舗詳細）。
+  フッターナビは各セクションへスムーズにスクロール
+
+## 技術スタック
+
+- [React](https://react.dev/) 18 + TypeScript
+- [Vite](https://vitejs.dev/) 6（開発サーバー / ビルド）
+- [Tailwind CSS](https://tailwindcss.com/) 4（スタイリング）
+- [Motion (Framer Motion)](https://motion.dev/)（アニメーション）
+
+> もとは Figma からの書き出しコードで、レイアウトは絶対座標（`top: 870px` のような指定）で
+> 構成されています。
+
+## 動かし方
+
+依存パッケージのインストール:
+
+```bash
+npm install
+```
+
+開発サーバーの起動（保存すると自動リロード）:
+
+```bash
+npm run dev
+```
+
+表示された `http://localhost:5173/` をブラウザで開きます。
+
+本番用のビルド:
+
+```bash
+npm run build
+```
+
+> ※ HTMLファイルを直接ダブルクリックしても動きません（TSX を変換する必要があるため）。
+> 必ず `npm run dev` 経由で開いてください。
+
+## ディレクトリ構成
+
+```
+src/
+├─ main.tsx                       … 入口（App を描画）
+├─ styles/                        … Tailwind・テーマ・フォント等のCSS
+├─ imports/                       … Figma書き出しのSVGパス・画像
+└─ app/
+   ├─ App.tsx                     … ページ切替・入店状態・スクロール制御
+   └─ components/
+      ├─ MainPage.tsx             … メインページ（暖簾・コンセプト・券売機など）
+      └─ SubPage.tsx              … サブページ（店舗詳細）
+```
+
+## 編集のヒント
+
+- **文言を変える**: `MainPage.tsx` / `SubPage.tsx` の該当テキストを直接書き換え
+- **色を変える**: クラス内の `text-[#9b7b3a]` などの色コード、またはコンセプトの配色
+  （ベース `#F2EDE4` / 墨 `#1C1008` / 朱赤 `#C0321A` / 金茶 `#9B7B3A`）
+- **位置を変える**: `top-[870px]` のような座標の数値を調整
+- **入店制御**: スクロール制限などは `App.tsx`（`NOREN_BOTTOM` 等）
