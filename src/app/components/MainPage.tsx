@@ -473,10 +473,8 @@ function KenbaikiSection({
 }
 
 function GuideSection({
-  onNavigate,
   scrollRoot,
 }: {
-  onNavigate: (page: "sub") => void;
   scrollRoot?: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
@@ -1209,7 +1207,7 @@ export default function MainPage({
           <p className="leading-[12px]">地元の豚骨ラーメンを食べ続けてきた。</p>
         </div>
         <KenbaikiSection onNavigate={onNavigate} sectionRef={productRef} />
-        <GuideSection onNavigate={onNavigate} scrollRoot={scrollRoot} />
+        <GuideSection scrollRoot={scrollRoot} />
         <SiteIntro sectionRef={siteIntroRef} revealed />
       </motion.div>
       {/* ファーストビュー（前面の表紙）。入店すると消える */}
