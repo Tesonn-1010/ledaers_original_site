@@ -552,9 +552,16 @@ body.entered .enter-button {
   background: var(--gray);
 }
 
+.guide-text {
+  left: 145px;
+  top: 120px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: 20px;
+}
+
 .guide-col {
-  width: 40px;
-  height: 430px;
   color: #000;
   font-size: 40px;
   line-height: 1.05;
@@ -562,17 +569,10 @@ body.entered .enter-button {
   writing-mode: vertical-rl;
   text-orientation: upright;
   white-space: nowrap;
-  gap: 12px;
-}
-
-.guide-col.one {
-  top: 120px;
-  left: 204px;
 }
 
 .guide-col.two {
-  top: 180px;
-  left: 154px;
+  margin-top: 60px;
 }
 
 .guide-col span {
@@ -591,10 +591,10 @@ body.entered .enter-button {
 }
 
 .guide-arrow {
-  left: 187px;
-  top: 2786px;
-  width: 15px;
-  height: 120px;
+  left: 134px;
+  top: 2839px;
+  width: 120px;
+  height: 15px;
   transform: rotate(90deg);
 }
 
