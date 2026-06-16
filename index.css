@@ -187,25 +187,30 @@ body.entered .cover-layer {
 
 .concept {
   left: 0;
-  top: 900px;
+  top: 1000px;
   width: 390px;
   height: 225px;
   background: var(--paper);
 }
 
 .concept-copy {
-  left: 89px;
-  top: 40px;
-  width: 212px;
-  height: 154px;
+  left: 85px;
+  top: 20px;
+  width: 220px;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 45px;
   color: var(--red);
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 30px;
 }
 
 .concept-copy p {
-  position: absolute;
-  width: 28px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  line-height: 1;
+  letter-spacing: 12px;
 }
 
 .ramen-large {
@@ -255,7 +260,7 @@ body.entered .cover-layer {
 
 .noren-gate {
   left: 50%;
-  top: 1000px;
+  top: 1400px;
   z-index: 20;
   width: 392px;
   height: 230px;

@@ -2,7 +2,7 @@
   const root = document.getElementById("scrollRoot");
   const enterButton = document.getElementById("enterButton");
   const backTop = document.getElementById("backTop");
-  const noRenBottom = 1180;
+  const noRenBottom = 1640;
 
   const enter = () => {
     document.body.classList.add("entered");
