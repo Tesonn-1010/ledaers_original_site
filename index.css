@@ -777,23 +777,25 @@ body.entered .enter-button {
 }
 
 .footer-kana {
-  left: 111px;
-  top: 4728px;
+  left: 125px;
+  top: 4750px;
   width: 16px;
   height: 151px;
   color: var(--gold);
   font-size: 16px;
   line-height: 40px;
+  letter-spacing: 15px;
 }
 
 .footer-logo {
-  left: 139px;
+  left: 130px;
   top: 4701px;
   width: 112px;
   height: 196px;
   color: #000;
   font-size: 100px;
   line-height: 100px;
+  white-space: nowrap;
 }
 
 .footer-nav {
@@ -861,10 +863,10 @@ body.entered .enter-button {
 
 .back-top span {
   position: absolute;
-  left: 2px;
+  left: 18px;
   top: 42px;
   width: 10px;
   color: #000;
-  font-size: 10px;
+  font-size: 15px;
   line-height: 10px;
 }

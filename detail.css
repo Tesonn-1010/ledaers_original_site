@@ -108,12 +108,12 @@ a {
 }
 
 .kodawari {
-  left: 56px;
+  left: 75px;
   top: 677px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 60px;
 }
 
 .kodawari p {
@@ -122,7 +122,7 @@ a {
 
 .kodawari-main {
   width: 20px;
-  height: 222px;
+  height: 270px;
   color: var(--red);
   font-size: 20px;
   line-height: 20px;
@@ -174,8 +174,8 @@ a {
 }
 
 .eat-title {
-  left: 24px;
-  top: 41px;
+  left: 300px;
+  top: 50px;
   width: 24px;
   color: var(--red);
   font-size: 24px;
@@ -248,7 +248,7 @@ a {
 .rule {
   left: 29px;
   width: 307px;
-  border-top: 1px solid rgba(155, 123, 58, 0.4);
+  border-top: 1px solid #9b7b3a;
 }
 
 .row-text {
@@ -289,11 +289,12 @@ a {
 
 .footer-kana {
   left: 120px;
-  top: 2673px;
+  top: 2650px;
   width: 16px;
-  color: #000;
+  color: rgba(155, 123, 58, 0.4);
   font-size: 16px;
   line-height: 16px;
+  letter-spacing: 15px;
 }
 
 .footer-logo {
@@ -367,7 +368,7 @@ a {
 
 .back-top span {
   position: absolute;
-  left: 2px;
+  left: 18px;
   top: 42px;
   width: 10px;
   color: #000;
