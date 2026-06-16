@@ -442,11 +442,11 @@ body.entered .enter-button {
 }
 
 .welcome {
-  left: 0;
-  top: 72px;
-  width: 100%;
+  left: 40px;
+  top: 100px;
+  width: 80%;
   color: var(--gold);
-  font-size: 40px;
+  font-size: 35px;
   letter-spacing: 3px;
   line-height: 1;
   text-align: center;
@@ -455,13 +455,13 @@ body.entered .enter-button {
 
 .intro-line {
   left: 65px;
-  top: 139px;
+  top: 190px;
   width: 260px;
   border-top: 1.5px solid rgba(155, 123, 58, 0.39);
 }
 
 .intro-copy {
-  top: 171px;
+  top: 226px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -474,7 +474,7 @@ body.entered .enter-button {
 }
 
 .intro-note {
-  top: 389px;
+  top: 424px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -488,14 +488,14 @@ body.entered .enter-button {
 
 .intro-sep {
   left: 64px;
-  top: 509px;
+  top: 544px;
   width: 262px;
   border-top: 1px solid var(--gold);
 }
 
 .intro-logo {
   left: 0;
-  top: 543px;
+  top: 578px;
   width: 100%;
   color: var(--gold);
   font-size: 78px;
@@ -505,7 +505,7 @@ body.entered .enter-button {
 
 .intro-kana {
   left: 0;
-  top: 630px;
+  top: 665px;
   width: 100%;
   color: var(--gold);
   font-size: 30px;
@@ -515,16 +515,16 @@ body.entered .enter-button {
 }
 
 .stamp {
-  left: 300px;
-  top: 545px;
+  left: 280px;
+  top: 580px;
   width: 60px;
   height: 60px;
   transform: rotate(-11deg);
 }
 
 .stamp-text {
-  left: 306px;
-  top: 557px;
+  left: 286px;
+  top: 592px;
   width: 50px;
   color: var(--red);
   text-align: center;
@@ -553,24 +553,41 @@ body.entered .enter-button {
 }
 
 .guide-col {
-  top: 150px;
   width: 40px;
   height: 430px;
   color: #000;
-  font-size: 32px;
+  font-size: 40px;
   line-height: 1.05;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.8em;
   writing-mode: vertical-rl;
   text-orientation: upright;
   white-space: nowrap;
+  gap: 12px;
 }
 
 .guide-col.one {
+  top: 120px;
   left: 204px;
 }
 
 .guide-col.two {
+  top: 180px;
   left: 154px;
+}
+
+.guide-col span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.guide.in-view .guide-col span {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc(var(--i) * 0.08s);
 }
 
 .guide-arrow {

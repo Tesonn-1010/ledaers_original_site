@@ -43,6 +43,31 @@
     window.location.href = "detail.html";
   });
 
+  const guide = document.querySelector(".guide");
+  if (guide) {
+    let index = 0;
+    guide.querySelectorAll(".guide-col").forEach((col) => {
+      const chars = [...col.textContent];
+      col.textContent = "";
+      chars.forEach((char) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        span.style.setProperty("--i", index++);
+        col.appendChild(span);
+      });
+    });
+
+    const guideObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          guide.classList.toggle("in-view", entry.isIntersecting);
+        });
+      },
+      { root, threshold: 0.15 }
+    );
+    guideObserver.observe(guide);
+  }
+
   const applyHashTarget = () => {
     const target = window.location.hash.replace("#", "");
     if (!target) return;
