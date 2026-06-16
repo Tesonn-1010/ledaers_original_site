@@ -617,12 +617,12 @@ body.entered .enter-button {
 }
 
 .product .section-label {
-  top: 26px;
+  top: 100px;
 }
 
 .ticket {
   left: 75px;
-  top: 44px;
+  top: 120px;
   color: var(--gold);
   font-size: 80px;
   line-height: 80px;
@@ -631,7 +631,7 @@ body.entered .enter-button {
 
 .shop-grid {
   left: 17px;
-  top: 135px;
+  top: 190px;
   width: 356px;
   height: 600px;
   padding: 30px;
