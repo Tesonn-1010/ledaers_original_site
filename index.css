@@ -617,12 +617,12 @@ body.entered .enter-button {
 }
 
 .product .section-label {
-  top: 100px;
+  top: 80px;
 }
 
 .ticket {
   left: 75px;
-  top: 120px;
+  top: 100px;
   color: var(--gold);
   font-size: 80px;
   line-height: 80px;
@@ -711,7 +711,7 @@ body.entered .enter-button {
 }
 
 .author-label {
-  top: 3826px;
+  top: 3850px;
   width: 100%;
   text-align: center;
   color: var(--gold);
@@ -722,8 +722,8 @@ body.entered .enter-button {
 }
 
 .author-photo {
-  left: 47px;
-  top: 3860px;
+  left: 10px;
+  top: 3900px;
   width: 296px;
   height: 296px;
 }
@@ -736,7 +736,7 @@ body.entered .enter-button {
 
 .author-copy {
   left: 47px;
-  top: 4162px;
+  top: 4210px;
   width: 162px;
   color: #2e2117;
   font-size: 9px;
@@ -744,7 +744,7 @@ body.entered .enter-button {
 }
 
 .message-label {
-  top: 4220px;
+  top: 4300px;
   width: 100%;
   text-align: center;
   color: var(--gold);
@@ -755,8 +755,8 @@ body.entered .enter-button {
 }
 
 .passion {
-  left: 32px;
-  top: 4246px;
+  left: 80px;
+  top: 4360px;
   width: 326px;
   height: 304px;
 }
@@ -765,7 +765,7 @@ body.entered .enter-button {
   position: absolute;
   width: 12px;
   color: var(--gold);
-  font-size: 12px;
+  font-size: 20px;
   line-height: 20px;
 }
 
