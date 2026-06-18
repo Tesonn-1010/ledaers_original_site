@@ -19,10 +19,10 @@
       <div class="page">
         <section class="main-layer" aria-label="骨霧メインページ">
           <section class="site-intro abs" id="siteIntro">
-            <p class="welcome abs">いらっしゃいませ</p>
+            <p class="welcome abs">当サイトについて</p>
             <div class="intro-line abs"></div>
             <div class="intro-copy abs">
-              <p>当サイトは福岡にて</p>
+              <p>福岡にて</p>
               <p>実際に食べ歩いた</p>
               <p>本物の豚骨ラーメンのみを</p>
               <p>厳選してご紹介して</p>
@@ -51,7 +51,7 @@
             </p>
           </section>
 
-          <section class="guide abs">
+          <section class="guide abs" id="guide">
             <div class="guide-text abs">
               <p class="guide-col one">あなたの一杯を、</p>
               <p class="guide-col two">選んでください</p>
@@ -91,10 +91,7 @@
                 <p class="shop-name">海鳴</p>
               </article>
             </div>
-            <!-- <div class="pager abs">
-              <span>１</span><span>2</span><span>3</span><span>4</span
-              ><span>5</span>
-            </div> -->
+            <p class="product-note abs">広告・案件は一切ございません</p>
           </section>
 
           <p class="author-label abs">AUTHOR</p>
@@ -128,14 +125,14 @@
             <p class="footer-kana abs vertical">こつぎり</p>
             <p class="footer-logo abs vertical">骨霧</p>
             <nav class="footer-nav abs" aria-label="フッターナビゲーション">
-              <button type="button" data-scroll="author" style="left: 0">
+              <button type="button" data-scroll="siteIntro" style="left: 0">
+                サイト紹介
+              </button>
+              <button type="button" data-scroll="author" style="left: 31px">
                 作者紹介
               </button>
-              <button type="button" data-scroll="product" style="left: 31px">
+              <button type="button" data-scroll="product" style="left: 62px">
                 商品特集
-              </button>
-              <button type="button" data-scroll="siteIntro" style="left: 62px">
-                サイト紹介
               </button>
               <button type="button" data-scroll="concept" style="left: 93px">
                 コンセプト
@@ -171,6 +168,9 @@
 
         <section class="cover-layer" id="top">
           <div class="cover-bg abs"></div>
+          <button class="skip-button" type="button" id="skipButton">
+            スキップ ▶
+          </button>
           <svg
             class="noodle noodle-top abs"
             viewBox="0 0 390.443 116.041"
@@ -294,7 +294,7 @@
               </div>
             </div>
             <button class="enter-button" type="button" id="enterButton">
-              <span>ここをタップして入店 ▼</span>
+              <span>のれんをタップして入店 ▼</span>
             </button>
           </div>
         </section>

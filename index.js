@@ -1,14 +1,36 @@
 (() => {
   const root = document.getElementById("scrollRoot");
   const enterButton = document.getElementById("enterButton");
+  const skipButton = document.getElementById("skipButton");
   const backTop = document.getElementById("backTop");
   const noRenBottom = 1640;
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  const setScale = () => {
+    const scale = Math.min(window.innerWidth / 390, 430 / 390);
+    document.documentElement.style.setProperty("--scale", scale.toFixed(4));
+  };
+  setScale();
+  window.addEventListener("resize", setScale);
 
   const enter = () => {
     document.body.classList.add("entered");
     setTimeout(() => {
-      document.getElementById("siteIntro").scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("guide").scrollIntoView({ behavior: "smooth", block: "start" });
     }, 1500);
+  };
+
+  // アニメを飛ばして即入店（商品一覧へ直行）
+  const enterInstant = () => {
+    document.body.classList.add("instant", "entered");
+    // 拡大率(scale:1)が確定してからスクロールしないと位置がずれる
+    requestAnimationFrame(() => {
+      document.getElementById("product").scrollIntoView({ behavior: "auto", block: "start" });
+      requestAnimationFrame(() => document.body.classList.remove("instant"));
+    });
   };
 
   const reset = () => {
@@ -23,6 +45,7 @@
   };
 
   enterButton.addEventListener("click", enter);
+  skipButton.addEventListener("click", enterInstant);
   backTop.addEventListener("click", reset);
   root.addEventListener("scroll", clampBeforeEntry, { passive: true });
 
@@ -57,15 +80,17 @@
       });
     });
 
+    const guideText = guide.querySelector(".guide-text") || guide;
     const guideObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          guide.classList.toggle("in-view", entry.isIntersecting);
+          // テキストが完全に画面内（＝1画面に収まりきって）から開始
+          guide.classList.toggle("in-view", entry.intersectionRatio >= 0.99);
         });
       },
-      { root, threshold: 0.15 }
+      { root, threshold: [0, 0.99, 1] }
     );
-    guideObserver.observe(guide);
+    guideObserver.observe(guideText);
   }
 
   const applyHashTarget = () => {
@@ -88,5 +113,12 @@
 
   window.addEventListener("hashchange", applyHashTarget);
   applyHashTarget();
+
+  // リロード時はスクロール位置の復元を打ち消し、必ず表紙から開始（#指定時は除く）
+  if (!window.location.hash) {
+    root.scrollTo({ top: 0 });
+    window.addEventListener("load", () => root.scrollTo({ top: 0 }));
+  }
+
   clampBeforeEntry();
 })();

@@ -35,15 +35,29 @@ p {
 
 .scroll-root {
   width: 390px;
-  height: 100vh;
+  height: calc(100vh / var(--scale, 1));
   overflow-x: hidden;
   overflow-y: auto;
   background: var(--paper);
   scrollbar-width: none;
+  zoom: var(--scale, 1);
 }
 
 .scroll-root::-webkit-scrollbar {
   display: none;
+}
+
+body.entered .scroll-root {
+  scroll-snap-type: y mandatory;
+}
+
+.site-intro,
+.guide,
+.product,
+.author-label,
+.message-label,
+.main-layer footer {
+  scroll-snap-align: start;
 }
 
 .page {
@@ -138,7 +152,7 @@ body.entered .cover-layer {
 
 .site-tag {
   left: 350px;
-  top: 150px;
+  top: 100px;
   width: 20px;
   height: 500px;
   color: var(--gold);
@@ -149,7 +163,7 @@ body.entered .cover-layer {
 
 .reading {
   left: 40px;
-  top: 330px;
+  top: 250px;
   width: 24px;
   color: var(--gold);
   font-size: 30px;
@@ -159,7 +173,7 @@ body.entered .cover-layer {
 
 .title {
   left: 135px;
-  top: 150px;
+  top: 90px;
   width: 120px;
   height: 550px;
   display: flex;
@@ -168,14 +182,14 @@ body.entered .cover-layer {
   justify-content: center;
   gap: 10px;
   color: #000;
-  font-size: 300px;
-  line-height: 200px;
+  font-size: 210px;
+  line-height: 210px;
   white-space: nowrap;
 }
 
 .noodle {
   left: 0;
-  top: 750px;
+  top: 600px;
   width: 390px;
   height: 115px;
   overflow: visible;
@@ -392,6 +406,35 @@ body.entered .enter-button {
   display: none;
 }
 
+.skip-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 40;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: rgba(242, 237, 228, 0.7);
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+body.entered .skip-button {
+  display: none;
+}
+
+body.instant .page,
+body.instant .main-layer,
+body.instant .cover-layer,
+body.instant .noren-half,
+body.instant .noren-mask,
+body.instant .noren-inner {
+  transition: none !important;
+  animation: none !important;
+}
+
 @keyframes reveal-noren {
   from {
     clip-path: inset(0 0 100% 0);
@@ -427,9 +470,9 @@ body.entered .enter-button {
 
 .site-intro {
   left: 0;
-  top: 1251px;
+  top: 3750px;
   width: 390px;
-  height: 844px;
+  height: 750px;
   border: 7px solid #000;
   overflow: hidden;
 }
@@ -546,7 +589,7 @@ body.entered .enter-button {
 
 .guide {
   left: 1px;
-  top: 2095px;
+  top: 1150px;
   width: 389px;
   height: 844px;
   background: var(--gray);
@@ -554,7 +597,7 @@ body.entered .enter-button {
 
 .guide-text {
   left: 145px;
-  top: 120px;
+  top: 50px;
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-start;
@@ -592,7 +635,7 @@ body.entered .enter-button {
 
 .guide-arrow {
   left: 134px;
-  top: 2839px;
+  top: 1830px;
   width: 120px;
   height: 15px;
   transform: rotate(90deg);
@@ -600,7 +643,7 @@ body.entered .enter-button {
 
 .product {
   left: 0;
-  top: 2939px;
+  top: 1994px;
   width: 390px;
   height: 843px;
   background: #000;
@@ -631,7 +674,7 @@ body.entered .enter-button {
 
 .shop-grid {
   left: 17px;
-  top: 190px;
+  top: 150px;
   width: 356px;
   height: 600px;
   padding: 30px;
@@ -684,8 +727,18 @@ body.entered .enter-button {
   font-family: "Inria Serif", serif;
 }
 
+.product-note {
+  top: 750px;
+  width: 100%;
+  text-align: center;
+  color: var(--gold);
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
 .pager {
-  top: 739px;
+  top: 700px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -711,7 +764,7 @@ body.entered .enter-button {
 }
 
 .author-label {
-  top: 3850px;
+  top: 2905px;
   width: 100%;
   text-align: center;
   color: var(--gold);
@@ -722,10 +775,12 @@ body.entered .enter-button {
 }
 
 .author-photo {
-  left: 10px;
-  top: 3900px;
-  width: 296px;
-  height: 296px;
+  left: 50%;
+  top: 2955px;
+  width: 264px;
+  height: 264px;
+  margin: 0;
+  transform: translateX(-50%);
 }
 
 .author-photo img {
@@ -735,8 +790,8 @@ body.entered .enter-button {
 }
 
 .author-copy {
-  left: 47px;
-  top: 4210px;
+  left: 63px;
+  top: 3230px;
   width: 162px;
   color: #2e2117;
   font-size: 9px;
@@ -744,7 +799,7 @@ body.entered .enter-button {
 }
 
 .message-label {
-  top: 4300px;
+  top: 3355px;
   width: 100%;
   text-align: center;
   color: var(--gold);
@@ -756,7 +811,7 @@ body.entered .enter-button {
 
 .passion {
   left: 80px;
-  top: 4360px;
+  top: 3415px;
   width: 326px;
   height: 304px;
 }
@@ -765,20 +820,20 @@ body.entered .enter-button {
   position: absolute;
   width: 12px;
   color: var(--gold);
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 16px;
 }
 
 .footer-rule {
   left: 12px;
-  top: 4701px;
+  top: 4506px;
   width: 366px;
   border-top: 1px solid #000;
 }
 
 .footer-kana {
   left: 125px;
-  top: 4750px;
+  top: 4555px;
   width: 16px;
   height: 151px;
   color: var(--gold);
@@ -789,7 +844,7 @@ body.entered .enter-button {
 
 .footer-logo {
   left: 130px;
-  top: 4701px;
+  top: 4506px;
   width: 112px;
   height: 196px;
   color: #000;
@@ -800,7 +855,7 @@ body.entered .enter-button {
 
 .footer-nav {
   left: 139px;
-  top: 4922px;
+  top: 4727px;
   width: 112px;
   height: 60px;
 }
@@ -829,7 +884,7 @@ body.entered .enter-button {
 
 .footer-message {
   left: 139px;
-  top: 5007px;
+  top: 4812px;
   width: 112px;
   height: 127px;
   color: #000;
@@ -844,7 +899,7 @@ body.entered .enter-button {
 
 .back-top {
   left: 309px;
-  top: 5042px;
+  top: 4847px;
   width: 40px;
   height: 95px;
   border: 0;
@@ -867,6 +922,6 @@ body.entered .enter-button {
   top: 42px;
   width: 10px;
   color: #000;
-  font-size: 15px;
+  font-size: 10px;
   line-height: 10px;
 }
